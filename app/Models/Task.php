@@ -6,9 +6,11 @@ namespace App\Models;
 
 use App\Enums\TaskPriorityEnum;
 use App\Enums\TaskStatusEnum;
+use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -35,6 +37,9 @@ use Illuminate\Support\Carbon;
  */
 class Task extends Model
 {
+    /** @use HasFactory<TaskFactory> */
+    use HasFactory;
+
 
     protected $table = 'tasks';
 
@@ -72,11 +77,14 @@ class Task extends Model
 
     public function scopeOrdered(Builder $query, bool $latestFirst = false): Builder
     {
+        $statusOrder = TaskStatusEnum::ordered();
+        $cases = collect($statusOrder)
+            ->map(fn ($value, $i) => "WHEN '{$value}' THEN {$i}")
+            ->implode(' ');
+
         return $query
             ->orderBy('date', $latestFirst ? 'DESC' : 'ASC')
-            ->orderByRaw(
-                "FIELD(status, '" . implode("','", TaskStatusEnum::ordered()) . "')"
-            )
+            ->orderByRaw("CASE status {$cases} END")
             ->orderBy('priority', 'desc')
             ->orderBy('created_at', 'desc');
     }

@@ -31,24 +31,6 @@ class TaskController extends Controller
             ->ordered($latestFirst);
     }
 
-    private function virtualTaskFromTemplate(RecurringTaskTemplate $template, Carbon $date): Task
-    {
-        $task = new Task([
-            'user_id' => $template->user_id,
-            'title' => $template->title,
-            'description' => $template->description,
-            'date' => $date->toDateString(),
-            'priority' => $template->priority,
-            'status' => TaskStatusEnum::TO_DO,
-            'recurring_task_template_id' => $template->id,
-        ]);
-        $task->setRelation('labels', $template->labels);
-        $task->is_virtual = true;
-        $task->created_at = now();
-        $task->updated_at = $task->created_at;
-        return $task;
-    }
-
     public function today(): Response
     {
         $today = Carbon::today();
@@ -73,8 +55,8 @@ class TaskController extends Controller
             ->unique();
 
         $virtualTasks = $recurring
-            ->reject(fn (RecurringTaskTemplate $t) => $existingTemplateIds->contains($t->id))
-            ->map(fn (RecurringTaskTemplate $t) => $this->virtualTaskFromTemplate($t, $today));
+            ->reject(fn(RecurringTaskTemplate $t) => $existingTemplateIds->contains($t->id))
+            ->map(fn(RecurringTaskTemplate $t) => $t->toVirtualTask($today));
 
         $allTasks = Task::sortCollection($tasks->concat($virtualTasks));
 
@@ -89,7 +71,7 @@ class TaskController extends Controller
         $end = today()->addDays(7);
 
         $tasks = $this->tasksQuery()
-            ->whereBetween('date', [$start, $end])
+            ->where('date', '>=', $start)
             ->get();
 
         /** @var Collection $recurring */
@@ -98,28 +80,11 @@ class TaskController extends Controller
             ->with(['labels', 'weekdays'])
             ->get();
 
-        $existingByTemplateAndDate = $tasks
-            ->filter(fn (Task $t) => $t->recurring_task_template_id !== null)
-            ->groupBy(fn (Task $t) => $t->recurring_task_template_id . '_' . $t->date->toDateString());
-
-        $virtualTasks = collect();
-        for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
-            $dateStr = $date->toDateString();
-            foreach ($recurring as $template) {
-                if (! $template->isDueOnDate($date)) {
-                    continue;
-                }
-                $key = $template->id . '_' . $dateStr;
-                if ($existingByTemplateAndDate->has($key)) {
-                    continue;
-                }
-                $virtualTasks->push($this->virtualTaskFromTemplate($template, $date->copy()));
-            }
-        }
+        $virtualTasks = RecurringTaskTemplate::generateVirtualTasks($recurring, $tasks, $start, $end);
 
         $tasksByDate = $tasks->concat($virtualTasks->all())
-            ->groupBy(fn (Task $t) => $t->date->toDateString())
-            ->map(fn ($group) => Task::sortCollection($group))
+            ->groupBy(fn(Task $t) => $t->date->toDateString())
+            ->map(fn($group) => Task::sortCollection($group))
             ->sortKeys();
 
         return Inertia::render('tasks/Upcoming', [
