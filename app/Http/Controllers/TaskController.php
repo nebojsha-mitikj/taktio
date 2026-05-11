@@ -72,7 +72,7 @@ class TaskController extends Controller
         $end = today()->addDays(7);
 
         $tasks = $this->tasksQuery()
-            ->where('date', '>=', $start)
+            ->where('date', '>=', $start->toDateString())
             ->get();
 
         /** @var Collection $recurring */
