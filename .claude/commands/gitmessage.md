@@ -9,8 +9,4 @@ The message should be concise (under 72 characters total), written in imperative
 
 Rules:
 - Never include Claude or any Co-Authored-By trailer in the commit message.
-
-Steps:
-1. Output the suggested commit message to the user.
-2. Run: `git commit -m "MESSAGE"` — the permission prompt will serve as confirmation.
-3. Run: `git push` — push the commit to the remote.
+- Only output the commit message. Do not run any git commands.
