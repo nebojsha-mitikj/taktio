@@ -145,7 +145,7 @@ class TaskController extends Controller
     {
         $searchAttributes = [
             'recurring_task_template_id' => $template->id,
-            'date' => Carbon::parse($request->date)->toDateString(),
+            'date' => Carbon::parse($request->date)->setTimezone(date_default_timezone_get())->toDateString(),
             'user_id' => auth()->id(),
         ];
 

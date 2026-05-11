@@ -56,7 +56,7 @@ class Task extends Model
     protected $casts = [
         'status' => TaskStatusEnum::class,
         'priority' => TaskPriorityEnum::class,
-        'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
     public function user(): BelongsTo
