@@ -13,3 +13,4 @@ Rules:
 Steps:
 1. Output the suggested commit message to the user.
 2. Run: `git commit -m "MESSAGE"` — the permission prompt will serve as confirmation.
+3. Run: `git push` — push the commit to the remote.
