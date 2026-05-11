@@ -14,6 +14,7 @@ use App\Models\RecurringTaskTemplate;
 use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Collection;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -144,7 +145,7 @@ class TaskController extends Controller
     {
         $searchAttributes = [
             'recurring_task_template_id' => $template->id,
-            'date' => $request->date,
+            'date' => Carbon::parse($request->date)->toDateString(),
             'user_id' => auth()->id(),
         ];
 
@@ -155,7 +156,11 @@ class TaskController extends Controller
             'status' => TaskStatusEnum::TO_DO,
         ];
 
-        $task = Task::firstOrCreate($searchAttributes, $createAttributes);
+        try {
+            $task = Task::firstOrCreate($searchAttributes, $createAttributes);
+        } catch (UniqueConstraintViolationException) {
+            $task = Task::firstWhere($searchAttributes);
+        }
 
         if (isset($request->status)) {
             $task->update(['status' => $request->status]);
