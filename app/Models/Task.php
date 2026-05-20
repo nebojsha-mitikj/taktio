@@ -9,12 +9,12 @@ use App\Enums\TaskStatusEnum;
 use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection as SupportCollection;
 
 /**
  * @property int $id
@@ -40,7 +40,6 @@ class Task extends Model
     /** @use HasFactory<TaskFactory> */
     use HasFactory;
 
-
     protected $table = 'tasks';
 
     protected $fillable = [
@@ -50,7 +49,7 @@ class Task extends Model
         'description',
         'date',
         'status',
-        'priority'
+        'priority',
     ];
 
     protected $casts = [
@@ -119,6 +118,4 @@ class Task extends Model
             return $b->created_at <=> $a->created_at;
         })->values();
     }
-
-
 }

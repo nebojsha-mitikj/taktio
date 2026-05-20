@@ -3,7 +3,6 @@
 use App\Http\Controllers\RecurringTaskTemplateController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::group(['middleware' => 'auth'], static function () {
     Route::get('/recurring', [RecurringTaskTemplateController::class, 'recurring'])
         ->name('recurring.index');

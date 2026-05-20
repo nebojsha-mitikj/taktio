@@ -27,10 +27,10 @@ class LabelController extends Controller
     public function show(Label $label): Response
     {
         $label->load([
-            'tasks' => fn($query) => $query
+            'tasks' => fn ($query) => $query
                 ->whereDate('date', '>=', today())
                 ->orderBy('date')
-                ->with('labels')
+                ->with('labels'),
         ]);
 
         $templates = $label->recurringTaskTemplates()
@@ -54,6 +54,7 @@ class LabelController extends Controller
     public function destroy(Label $label): RedirectResponse
     {
         $label->delete();
+
         return redirect()
             ->route('labels.index')
             ->with('success', 'Label deleted successfully.');
@@ -62,6 +63,7 @@ class LabelController extends Controller
     public function update(UpdateLabelRequest $request, Label $label): RedirectResponse
     {
         $label->update($request->validated());
+
         return redirect()
             ->route('labels.index')
             ->with('success', 'Label updated successfully.');
@@ -70,6 +72,7 @@ class LabelController extends Controller
     public function store(StoreLabelRequest $request): RedirectResponse
     {
         $request->user()->labels()->create($request->validated());
+
         return redirect()
             ->route('labels.index')
             ->with('success', 'Label created successfully.');

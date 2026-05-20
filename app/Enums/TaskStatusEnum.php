@@ -7,7 +7,7 @@ use App\Traits\EnumValues;
 enum TaskStatusEnum: string
 {
     use EnumValues;
-    CASE TO_DO = 'to-do';
+    case TO_DO = 'to-do';
     case IN_PROGRESS = 'in-progress';
     case COMPLETED = 'completed';
 

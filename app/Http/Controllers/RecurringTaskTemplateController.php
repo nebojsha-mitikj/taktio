@@ -15,7 +15,6 @@ use Inertia\Response;
 
 class RecurringTaskTemplateController extends Controller
 {
-
     public function recurring(): Response
     {
         $templates = RecurringTaskTemplate::query()
@@ -32,19 +31,21 @@ class RecurringTaskTemplateController extends Controller
         });
 
         return Inertia::render('recurring/Recurring', [
-            'templates' => $templates
+            'templates' => $templates,
         ]);
     }
 
     public function updateLabels(UpdateTaskLabelsRequest $request, RecurringTaskTemplate $template): RedirectResponse
     {
         $template->labels()->sync($request->label_ids);
+
         return back()->with('success', 'Recurring template labels updated successfully.');
     }
 
     public function destroy(RecurringTaskTemplate $template): RedirectResponse
     {
         $template->delete();
+
         return back()->with('success', 'Recurring template deleted successfully.');
     }
 
@@ -56,12 +57,14 @@ class RecurringTaskTemplateController extends Controller
             'start_date' => Carbon::today()->toDateString(),
             'end_date' => null,
         ]);
+
         return back()->with('success', 'Recurring template created successfully.');
     }
 
     public function update(UpdateRecurringTaskTemplateRequest $request, RecurringTaskTemplate $template): RedirectResponse
     {
         $template->saveFromPayload($request->validated());
+
         return back()->with('success', 'Recurring template updated successfully.');
     }
 
@@ -80,6 +83,7 @@ class RecurringTaskTemplateController extends Controller
             } else {
                 $openPeriod->update(['end_date' => $today]);
             }
+
             return back()->with('success', 'Recurring template deactivated successfully.');
         }
 
@@ -90,5 +94,4 @@ class RecurringTaskTemplateController extends Controller
 
         return back()->with('success', 'Recurring template activated successfully.');
     }
-
 }

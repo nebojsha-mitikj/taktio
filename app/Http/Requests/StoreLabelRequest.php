@@ -18,8 +18,8 @@ class StoreLabelRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                Rule::unique('labels','name')->where('user_id', $this->user()->id)
-            ]
+                Rule::unique('labels', 'name')->where('user_id', $this->user()->id),
+            ],
         ];
     }
 }

@@ -24,7 +24,6 @@ use Illuminate\Support\Carbon;
  */
 class RecurringTaskTemplatePeriod extends Model
 {
-
     protected $table = 'recurring_task_template_periods';
 
     protected $fillable = [
@@ -42,5 +41,4 @@ class RecurringTaskTemplatePeriod extends Model
     {
         return $this->belongsTo(RecurringTaskTemplate::class, 'recurring_task_template_id');
     }
-
 }

@@ -8,6 +8,7 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { show as getLabel, index as getLabels } from '@/routes/labels';
+import { index as planIndex } from '@/actions/App/Http/Controllers/PlanController';
 import { index as recurringTemplates } from '@/routes/recurring';
 import { history, today, upcoming } from '@/routes/tasks';
 import type { AppPageProps, NavItem } from '@/types';
@@ -18,6 +19,7 @@ import {
     Circle,
     Clock,
     History,
+    LayoutList,
     Menu,
     Repeat,
     Star,
@@ -190,6 +192,20 @@ function onLabelsChevronClick() {
                     Recurring
                 </Link>
 
+                <!-- Plan -->
+                <Link
+                    :href="planIndex().url"
+                    class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                    :class="
+                        page.url.startsWith('/plan')
+                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
+                            : 'text-[#555] dark:text-[#888]'
+                    "
+                >
+                    <LayoutList class="size-3.5" />
+                    Planner
+                </Link>
+
                 <!-- Labels hover dropdown -->
                 <div
                     class="relative"
@@ -353,6 +369,19 @@ function onLabelsChevronClick() {
                 >
                     <Repeat class="size-4" />
                     Recurring
+                </Link>
+                <Link
+                    :href="planIndex().url"
+                    class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                    :class="
+                        page.url.startsWith('/plan')
+                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
+                            : 'text-[#555] dark:text-[#888]'
+                    "
+                    @click="mobileOpen = false"
+                >
+                    <LayoutList class="size-4" />
+                    Planner
                 </Link>
                 <div
                     class="my-1 border-t border-black/[0.06] dark:border-white/[0.06]"

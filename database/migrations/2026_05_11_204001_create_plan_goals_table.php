@@ -10,18 +10,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('label_task', function (Blueprint $table) {
-            $table->foreignId('task_id')
-                ->constrained('tasks')
+        Schema::create('plan_goals', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('month_plan_id')
+                ->constrained('month_plans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreignId('label_id')
-                ->constrained('labels')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->primary(['task_id', 'label_id']);
+            $table->string('title', 500);
+            $table->boolean('completed')->default(false);
 
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('label_task');
+        Schema::dropIfExists('plan_goals');
     }
 };

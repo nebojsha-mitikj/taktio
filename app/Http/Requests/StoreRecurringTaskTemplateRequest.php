@@ -18,7 +18,6 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StoreRecurringTaskTemplateRequest extends FormRequest
 {
-
     use RecurringTaskTemplateRules;
 
     public function rules(): array

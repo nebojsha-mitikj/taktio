@@ -13,11 +13,11 @@ use Database\Factories\RecurringTaskTemplateFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection as SupportCollection;
 
 /**
  * @property int $id
@@ -141,6 +141,7 @@ class RecurringTaskTemplate extends Model
         $task->is_virtual = true;
         $task->created_at = now();
         $task->updated_at = $task->created_at;
+
         return $task;
     }
 
@@ -151,8 +152,8 @@ class RecurringTaskTemplate extends Model
         Carbon $end
     ): SupportCollection {
         $existingByTemplateAndDate = $existingTasks
-            ->filter(fn(Task $t) => $t->recurring_task_template_id !== null)
-            ->groupBy(fn(Task $t) => $t->recurring_task_template_id . '_' . $t->date->toDateString());
+            ->filter(fn (Task $t) => $t->recurring_task_template_id !== null)
+            ->groupBy(fn (Task $t) => $t->recurring_task_template_id.'_'.$t->date->toDateString());
 
         $windowDates = collect();
         for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
@@ -160,17 +161,17 @@ class RecurringTaskTemplate extends Model
         }
 
         $extraDates = $existingTasks
-            ->filter(fn(Task $t) => $t->date->gt($end))
+            ->filter(fn (Task $t) => $t->date->gt($end))
             ->pluck('date')
-            ->unique(fn($date) => $date->toDateString());
+            ->unique(fn ($date) => $date->toDateString());
 
         $virtualTasks = collect();
         foreach ($windowDates->concat($extraDates) as $date) {
             foreach ($templates as $template) {
-                if (!$template->isDueOnDate($date)) {
+                if (! $template->isDueOnDate($date)) {
                     continue;
                 }
-                $key = $template->id . '_' . $date->toDateString();
+                $key = $template->id.'_'.$date->toDateString();
                 if ($existingByTemplateAndDate->has($key)) {
                     continue;
                 }
@@ -199,5 +200,4 @@ class RecurringTaskTemplate extends Model
             ->orderBy('priority', 'desc')
             ->orderBy('created_at', 'desc');
     }
-
 }

@@ -18,6 +18,7 @@ class UpdateStatusRequest extends FormRequest
     {
         /** @var Task $task */
         $task = $this->route('task');
+
         return $task->date->isToday();
     }
 

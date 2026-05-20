@@ -23,14 +23,14 @@ class UpdateTaskRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'nullable|string',
-            'date' => ['required', 'date', 'after_or_equal:' . now()->startOfDay()->toDateString()],
+            'date' => ['required', 'date', 'after_or_equal:'.now()->startOfDay()->toDateString()],
             'priority' => ['required', new Enum(TaskPriorityEnum::class)],
             'label_ids' => ['present', 'array'],
             'label_ids.*' => [
                 'integer',
                 Rule::exists('labels', 'id')
                     ->where('user_id', $this->user()->id),
-            ]
+            ],
         ];
     }
 }

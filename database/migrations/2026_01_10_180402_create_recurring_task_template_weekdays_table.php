@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::create('recurring_task_template_weekdays', function (Blueprint $table) {

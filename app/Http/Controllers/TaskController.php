@@ -15,17 +15,17 @@ use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\UniqueConstraintViolationException;
-use Illuminate\Support\Collection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class TaskController extends Controller
 {
-
     private function tasksQuery(?int $userId = null, bool $latestFirst = false): Builder
     {
         $userId ??= auth()->id();
+
         return Task::query()
             ->with('labels')
             ->where('user_id', $userId)
@@ -56,13 +56,13 @@ class TaskController extends Controller
             ->unique();
 
         $virtualTasks = $recurring
-            ->reject(fn(RecurringTaskTemplate $t) => $existingTemplateIds->contains($t->id))
-            ->map(fn(RecurringTaskTemplate $t) => $t->toVirtualTask($today));
+            ->reject(fn (RecurringTaskTemplate $t) => $existingTemplateIds->contains($t->id))
+            ->map(fn (RecurringTaskTemplate $t) => $t->toVirtualTask($today));
 
         $allTasks = Task::sortCollection($tasks->concat($virtualTasks));
 
         return Inertia::render('tasks/Today', [
-            'tasks' => $allTasks
+            'tasks' => $allTasks,
         ]);
     }
 
@@ -84,8 +84,8 @@ class TaskController extends Controller
         $virtualTasks = RecurringTaskTemplate::generateVirtualTasks($recurring, $tasks, $start, $end);
 
         $tasksByDate = $tasks->concat($virtualTasks->all())
-            ->groupBy(fn(Task $t) => $t->date->toDateString())
-            ->map(fn($group) => Task::sortCollection($group))
+            ->groupBy(fn (Task $t) => $t->date->toDateString())
+            ->map(fn ($group) => Task::sortCollection($group))
             ->sortKeys();
 
         return Inertia::render('tasks/Upcoming', [
@@ -99,13 +99,14 @@ class TaskController extends Controller
             'tasksByDate' => $this->tasksQuery(latestFirst: true)
                 ->whereDate('date', '<', today())
                 ->get()
-                ->groupBy(fn($task) => $task->date->toDateString())
+                ->groupBy(fn ($task) => $task->date->toDateString()),
         ]);
     }
 
     public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
+
         return back()->with('success', 'Task deleted successfully.');
     }
 
@@ -116,18 +117,21 @@ class TaskController extends Controller
         unset($data['label_ids']);
         $task->update($data);
         $task->labels()->sync($labelIds);
+
         return back()->with('success', 'Task updated successfully.');
     }
 
     public function updateStatus(UpdateStatusRequest $request, Task $task): RedirectResponse
     {
         $task->update($request->validated());
+
         return back()->with('success', 'Task status updated successfully.');
     }
 
     public function updateLabels(UpdateTaskLabelsRequest $request, Task $task): RedirectResponse
     {
         $task->labels()->sync($request->label_ids);
+
         return back()->with('success', 'Task labels updated successfully.');
     }
 
@@ -138,6 +142,7 @@ class TaskController extends Controller
         unset($data['label_ids']);
         $task = $request->user()->tasks()->create($data);
         $task->labels()->sync($labelIds);
+
         return back()->with('success', 'Task created successfully.');
     }
 
