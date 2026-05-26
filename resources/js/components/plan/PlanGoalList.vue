@@ -26,6 +26,7 @@ const paddedMonth = (m: number): string => String(m).padStart(2, '0');
 
 const focusAtEnd = (el: Element | ComponentPublicInstance | null): void => {
     if (!(el instanceof HTMLInputElement)) return;
+    if (document.activeElement === el) return;
     el.focus();
     el.setSelectionRange(el.value.length, el.value.length);
 };

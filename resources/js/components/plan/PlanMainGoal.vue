@@ -18,6 +18,7 @@ const mainGoalDraft = ref(mainGoal ?? '');
 
 const focusAtEnd = (el: Element | ComponentPublicInstance | null): void => {
     if (!(el instanceof HTMLInputElement)) return;
+    if (document.activeElement === el) return;
     el.focus();
     el.setSelectionRange(el.value.length, el.value.length);
 };
