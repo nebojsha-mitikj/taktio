@@ -89,7 +89,7 @@ function onLabelsChevronClick() {
             <Link
                 :href="today()"
                 class="text-xl font-black transition-all hover:scale-[1.02] hover:opacity-70"
-                >nebbo</Link
+                >Taktio</Link
             >
 
             <!-- Desktop Nav -->

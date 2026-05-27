@@ -9,7 +9,7 @@ import { initializeTheme } from './composables/useAppearance';
 
 axios.defaults.headers.common['X-Timezone'] = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const appName = import.meta.env.VITE_APP_NAME || 'nebbo';
+const appName = import.meta.env.VITE_APP_NAME || 'Taktio';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

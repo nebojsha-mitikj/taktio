@@ -3,5 +3,11 @@
     "allow": [
       "Bash(git push)"
     ]
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest", "--output-dir", ".claude/playwright"]
+    }
   }
 }

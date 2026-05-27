@@ -102,7 +102,7 @@ import { Form, Head } from '@inertiajs/vue3';
                 <!-- Submit -->
                 <Button
                     type="submit"
-                    class="mt-2 w-full"
+                    class="mt-2 w-full bg-brand text-page hover:bg-brand-hover"
                     :disabled="processing"
                     :tabindex="5"
                     data-test="register-user-button"
