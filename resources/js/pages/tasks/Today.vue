@@ -46,11 +46,11 @@ const allDone = computed(
                 <div class="flex items-baseline justify-between">
                     <div>
                         <h1
-                            class="text-2xl font-bold tracking-tight text-[#111] dark:text-white"
+                            class="text-2xl font-bold tracking-tight text-foreground"
                         >
                             Today
                         </h1>
-                        <p class="mt-0.5 text-sm text-[#888] dark:text-[#666]">
+                        <p class="mt-0.5 text-sm text-muted-foreground">
                             Your scheduled tasks for today.
                         </p>
                     </div>
@@ -60,12 +60,12 @@ const allDone = computed(
                             :class="
                                 allDone
                                     ? 'text-emerald-600 dark:text-emerald-400'
-                                    : 'text-[#555] dark:text-[#888]'
+                                    : 'text-muted-foreground'
                             "
                         >
                             {{ completed }}/{{ tasks.length }}
                         </span>
-                        <p class="text-[11px] text-[#bbb] dark:text-[#555]">
+                        <p class="text-[11px] text-muted-foreground/60">
                             complete
                         </p>
                     </div>
@@ -73,15 +73,11 @@ const allDone = computed(
 
                 <!-- Progress bar -->
                 <div
-                    class="h-1.5 w-full overflow-hidden rounded-full bg-black/[0.08] dark:bg-white/[0.08]"
+                    class="h-1.5 w-full overflow-hidden rounded-full bg-muted"
                 >
                     <div
                         class="h-full rounded-full transition-all duration-700 ease-out"
-                        :class="
-                            allDone
-                                ? 'bg-emerald-500'
-                                : 'bg-gradient-to-r from-[#333] to-[#666] dark:from-white/80 dark:to-white/50'
-                        "
+                        :class="allDone ? 'bg-emerald-500' : 'bg-brand'"
                         :style="{ width: Math.max(progress, 2) + '%' }"
                     />
                 </div>

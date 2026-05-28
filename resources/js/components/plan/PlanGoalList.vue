@@ -163,10 +163,10 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
 <template>
     <div class="space-y-4">
         <div class="flex items-center justify-between">
-            <p class="text-xs font-semibold uppercase tracking-wider text-[#999] dark:text-[#666]">Goals</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Goals</p>
             <button
                 v-if="!isPast"
-                class="flex cursor-pointer items-center gap-1 text-xs text-[#bbb] transition-colors hover:text-[#555] dark:text-[#555] dark:hover:text-[#aaa]"
+                class="flex cursor-pointer items-center gap-1 text-xs text-muted-foreground/50 transition-colors hover:text-muted-foreground"
                 @click="openAddGoal"
             >
                 <Plus class="size-3" />
@@ -177,7 +177,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
         <!-- Goals list -->
         <div
             v-if="goals.length > 0 || addingGoal"
-            class="rounded-xl bg-white shadow-sm ring-1 ring-inset ring-black/[0.07] dark:bg-[#111] dark:ring-white/[0.07]"
+            class="rounded-xl bg-card shadow-sm ring-1 ring-inset ring-black/[0.07] dark:ring-white/[0.07]"
         >
             <!-- Wrapper keeps last:border-b-0 isolated from the add-goal sibling -->
             <div>
@@ -204,7 +204,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                             <input
                                 v-if="editingGoalId === goal.id"
                                 v-model="goalDraft"
-                                class="w-full bg-transparent p-0 text-[15px] font-medium leading-snug text-[#111] focus:outline-none dark:text-white"
+                                class="w-full bg-transparent p-0 text-[15px] font-medium leading-snug text-foreground focus:outline-none"
                                 @blur="saveGoal(goal)"
                                 @keydown.enter="saveGoal(goal)"
                                 @keydown.escape="editingGoalId = null"
@@ -214,7 +214,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                             <span
                                 v-else
                                 class="block text-[15px] font-medium leading-snug transition-colors"
-                                :class="goal.completed ? 'text-[#bbb] line-through dark:text-[#555]' : 'text-[#111] dark:text-white'"
+                                :class="goal.completed ? 'text-muted-foreground/50 line-through' : 'text-foreground'"
                             >
                                 {{ goal.title }}
                             </span>
@@ -223,7 +223,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                         <div v-if="!isPast" class="flex shrink-0 items-center">
                             <button
                                 v-if="editingGoalId === goal.id"
-                                class="flex size-7 cursor-pointer items-center justify-center rounded-full text-[#888] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                                class="flex size-7 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                                 @mousedown.prevent
                                 @click.stop="saveGoal(goal)"
                             >
@@ -263,7 +263,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                                 <input
                                     v-if="editingStepId === step.id"
                                     v-model="stepDraft"
-                                    class="w-full bg-transparent p-0 text-[15px] font-medium leading-snug text-[#111] focus:outline-none dark:text-white"
+                                    class="w-full bg-transparent p-0 text-[15px] font-medium leading-snug text-foreground focus:outline-none"
                                     @blur="saveStep(goal, step)"
                                     @keydown.enter="saveStep(goal, step)"
                                     @keydown.escape="editingStepId = null"
@@ -273,7 +273,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                                 <span
                                     v-else
                                     class="block text-[15px] font-medium leading-snug transition-colors"
-                                    :class="step.completed ? 'text-[#bbb] line-through dark:text-[#555]' : 'text-[#111] dark:text-white'"
+                                    :class="step.completed ? 'text-muted-foreground/50 line-through' : 'text-foreground'"
                                 >
                                     {{ step.title }}
                                 </span>
@@ -281,7 +281,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
 
                             <button
                                 v-if="!isPast && editingStepId === step.id"
-                                class="flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#888] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                                class="flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                                 @mousedown.prevent
                                 @click.stop="saveStep(goal, step)"
                             >
@@ -303,7 +303,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                                 <input
                                     v-model="newStepTitle"
                                     placeholder="Step title…"
-                                    class="flex-1 bg-transparent p-0 text-[15px] font-medium leading-snug text-[#111] placeholder-[#ccc] focus:outline-none disabled:opacity-50 dark:text-white dark:placeholder-[#555]"
+                                    class="flex-1 bg-transparent p-0 text-[15px] font-medium leading-snug text-foreground placeholder-muted-foreground/40 focus:outline-none disabled:opacity-50"
                                     :disabled="addingStepLoading"
                                     @keydown.enter="submitNewStep(goal)"
                                     @keydown.escape="cancelAddStep"
@@ -311,7 +311,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                                     :ref="el => el && nextTick(() => (el as HTMLInputElement).focus())"
                                 />
                                 <button
-                                    class="cursor-pointer rounded p-0.5 text-[#888] hover:text-[#111] disabled:opacity-40 dark:hover:text-white"
+                                    class="cursor-pointer rounded p-0.5 text-muted-foreground hover:text-foreground disabled:opacity-40"
                                     :disabled="addingStepLoading"
                                     @mousedown.prevent
                                     @click.stop="submitNewStep(goal)"
@@ -334,7 +334,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                 <input
                     v-model="newGoalTitle"
                     placeholder="New goal title…"
-                    class="flex-1 bg-transparent p-0 text-[15px] font-medium text-[#111] placeholder-[#ccc] focus:outline-none disabled:opacity-50 dark:text-white dark:placeholder-[#555]"
+                    class="flex-1 bg-transparent p-0 text-[15px] font-medium text-foreground placeholder-muted-foreground/40 focus:outline-none disabled:opacity-50"
                     :disabled="addingGoalLoading"
                     ref="newGoalInputRef"
                     @keydown.enter="submitNewGoal"
@@ -343,7 +343,7 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
                 />
                 <button
                     v-if="newGoalTitle.trim()"
-                    class="cursor-pointer rounded p-0.5 text-[#888] hover:text-[#111] disabled:opacity-40 dark:hover:text-white"
+                    class="cursor-pointer rounded p-0.5 text-muted-foreground hover:text-foreground disabled:opacity-40"
                     :disabled="addingGoalLoading"
                     @mousedown.prevent
                     @click.stop="submitNewGoal"
@@ -356,11 +356,11 @@ const toggleStep = (goal: PlanGoal, step: PlanGoalStep): void => {
         <!-- Empty state -->
         <div
             v-else-if="goals.length === 0"
-            class="rounded-xl bg-white px-6 py-8 text-center shadow-sm ring-1 ring-inset ring-black/[0.07] dark:bg-[#111] dark:ring-white/[0.07]"
+            class="rounded-xl bg-card px-6 py-8 text-center shadow-sm ring-1 ring-inset ring-black/[0.07] dark:ring-white/[0.07]"
             :class="!isPast ? 'cursor-pointer' : ''"
             @click="!isPast && openAddGoal()"
         >
-            <p class="text-sm text-[#999] dark:text-[#666]">
+            <p class="text-sm text-muted-foreground">
                 {{ isPast ? 'No goals were set for this month.' : 'No goals yet.' }}
             </p>
         </div>

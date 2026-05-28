@@ -9,7 +9,7 @@ const { items, emptyText } = defineProps<{
     <div>
         <div
             v-if="items.length"
-            class="rounded-xl bg-white shadow-sm ring-1 ring-inset ring-black/[0.07] dark:bg-[#111] dark:ring-white/[0.07]"
+            class="rounded-xl bg-card shadow-sm ring-1 ring-inset ring-black/[0.07] dark:ring-white/[0.07]"
         >
             <div
                 v-for="item in items"
@@ -20,7 +20,7 @@ const { items, emptyText } = defineProps<{
             </div>
         </div>
 
-        <div v-else class="text-sm text-[#999] dark:text-[#666]">
+        <div v-else class="text-sm text-muted-foreground">
             {{ emptyText }}
         </div>
     </div>

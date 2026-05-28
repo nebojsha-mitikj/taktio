@@ -149,11 +149,11 @@ const submitRequest = (
                     <span
                         class="flex size-8 items-center justify-center rounded-lg bg-black/[0.05] dark:bg-white/[0.06]"
                     >
-                        <Repeat class="size-4 text-[#555] dark:text-[#aaa]" />
+                        <Repeat class="size-4 text-muted-foreground" />
                     </span>
                     <div>
                         <DialogTitle
-                            class="text-base font-semibold text-[#111] dark:text-white"
+                            class="text-base font-semibold text-foreground"
                         >
                             {{
                                 isEditing
@@ -161,7 +161,7 @@ const submitRequest = (
                                     : 'New recurring task'
                             }}
                         </DialogTitle>
-                        <DialogDescription class="text-[13px] text-[#999] dark:text-[#666]">
+                        <DialogDescription class="text-[13px] text-muted-foreground">
                             {{
                                 isEditing
                                     ? 'Update the recurrence settings.'
@@ -171,7 +171,7 @@ const submitRequest = (
                     </div>
                 </div>
                 <button
-                    class="flex size-7 cursor-pointer items-center justify-center rounded-lg text-[#aaa] transition-colors hover:bg-black/[0.06] hover:text-[#555] dark:hover:bg-white/[0.06] dark:hover:text-[#ccc]"
+                    class="flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground/60 transition-colors hover:bg-black/[0.06] hover:text-foreground dark:hover:bg-white/[0.06]"
                     @click="open = false"
                 >
                     <X class="size-4" />
@@ -183,22 +183,22 @@ const submitRequest = (
                 <!-- Title -->
                 <div class="space-y-1.5">
                     <label
-                        class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                        class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Title</label
                     >
                     <input
                         v-model="title"
                         placeholder="e.g. Morning run, Daily standup…"
-                        class="w-full rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-[#111] transition-colors outline-none placeholder:text-[#bbb] focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-white dark:placeholder:text-[#555] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
+                        class="w-full rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-foreground transition-colors outline-none placeholder:text-muted-foreground/50 focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
                     />
                 </div>
 
                 <!-- Description -->
                 <div class="space-y-1.5">
                     <label
-                        class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                        class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Description
-                        <span class="font-normal text-[#bbb] normal-case"
+                        <span class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -206,7 +206,7 @@ const submitRequest = (
                         v-model="description"
                         placeholder="Add more context..."
                         rows="2"
-                        class="w-full resize-none rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-[#111] transition-colors outline-none placeholder:text-[#bbb] focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-white dark:placeholder:text-[#555] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
+                        class="w-full resize-none rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-foreground transition-colors outline-none placeholder:text-muted-foreground/50 focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
                     />
                 </div>
 
@@ -215,7 +215,7 @@ const submitRequest = (
                     <!-- Recurrence -->
                     <div class="space-y-1.5">
                         <label
-                            class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                            class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                             >Schedule</label
                         >
                         <Select v-model="recur">
@@ -244,7 +244,7 @@ const submitRequest = (
                     <!-- Priority -->
                     <div class="space-y-1.5">
                         <label
-                            class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                            class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                             >Priority</label
                         >
                         <Select v-model="priority">
@@ -269,7 +269,7 @@ const submitRequest = (
                 <!-- Weekday picker (only for weekly) -->
                 <div v-if="recur === TaskRecur.WEEKLY" class="space-y-1.5">
                     <label
-                        class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                        class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Days of the week</label
                     >
                     <div class="flex flex-wrap gap-2">
@@ -285,8 +285,8 @@ const submitRequest = (
                             class="rounded-lg border px-3 py-1.5 text-[12px] font-semibold transition-colors"
                             :class="
                                 weekdays.includes(day)
-                                    ? 'border-[#111] bg-[#111] text-white dark:border-white dark:bg-white dark:text-[#111]'
-                                    : 'border-black/[0.1] bg-[#fafafa] text-[#555] hover:bg-black/[0.04] dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-[#aaa] dark:hover:bg-white/[0.07]'
+                                    ? 'border-brand bg-brand text-page'
+                                    : 'border-black/[0.1] bg-muted/20 text-muted-foreground hover:bg-black/[0.04] dark:border-white/[0.1] dark:bg-white/[0.04] dark:hover:bg-white/[0.07]'
                             "
                         >
                             {{ capitalizeFirstLetter(day).slice(0, 3) }}
@@ -297,9 +297,9 @@ const submitRequest = (
                 <!-- Labels -->
                 <div class="space-y-1.5">
                     <label
-                        class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                        class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Labels
-                        <span class="font-normal text-[#bbb] normal-case"
+                        <span class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -322,7 +322,7 @@ const submitRequest = (
                                 >
                                     {{ label.name }}
                                 </SelectItem>
-                                <p v-if="!labels.length" class="px-3 py-2 text-sm text-[#999] dark:text-[#666]">No labels yet.</p>
+                                <p v-if="!labels.length" class="px-3 py-2 text-sm text-muted-foreground">No labels yet.</p>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -335,7 +335,7 @@ const submitRequest = (
             >
                 <button
                     type="button"
-                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-[#555] transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:text-[#999] dark:hover:bg-white/[0.05]"
+                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:hover:bg-white/[0.05]"
                     :disabled="isSubmitting"
                     @click="open = false"
                 >
@@ -343,7 +343,7 @@ const submitRequest = (
                 </button>
                 <button
                     type="button"
-                    class="cursor-pointer rounded-lg bg-[#111] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#333] disabled:opacity-40 dark:bg-white dark:text-[#111] dark:hover:bg-neutral-200"
+                    class="cursor-pointer rounded-lg bg-brand px-4 py-2 text-sm font-medium text-page transition-colors hover:bg-brand-hover disabled:opacity-40"
                     :disabled="isSubmitDisabled"
                     @click="submit"
                 >

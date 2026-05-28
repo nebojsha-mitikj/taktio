@@ -33,7 +33,7 @@ const tasksByDate = computed<Record<string, Task[]>>(() => {
 });
 
 const colorClass =
-    'text-[#888] bg-black/[0.05] dark:text-[#666] dark:bg-white/[0.06]';
+    'text-muted-foreground bg-black/[0.05] dark:bg-white/[0.06]';
 </script>
 
 <template>
@@ -51,11 +51,11 @@ const colorClass =
                 </span>
                 <div>
                     <h1
-                        class="text-2xl font-bold tracking-tight text-[#111] dark:text-white"
+                        class="text-2xl font-bold tracking-tight text-foreground"
                     >
                         {{ label.name }}
                     </h1>
-                    <p class="mt-0.5 text-sm text-[#888] dark:text-[#666]">
+                    <p class="mt-0.5 text-sm text-muted-foreground">
                         {{
                             label.tasks.length > 0
                                 ? label.tasks.length +
@@ -70,9 +70,9 @@ const colorClass =
             <!-- Empty state -->
             <div
                 v-if="label.tasks.length === 0"
-                class="rounded-xl border border-black/[0.07] bg-white px-6 py-12 text-center shadow-sm dark:border-white/[0.07] dark:bg-[#111]"
+                class="rounded-xl border border-black/[0.07] bg-card px-6 py-12 text-center shadow-sm dark:border-white/[0.07]"
             >
-                <p class="text-sm text-[#999] dark:text-[#666]">
+                <p class="text-sm text-muted-foreground">
                     No tasks for this label yet.
                 </p>
             </div>
@@ -86,7 +86,7 @@ const colorClass =
                 >
                     <div class="flex items-center gap-3">
                         <span
-                            class="text-[11px] font-semibold tracking-wide text-[#999] dark:text-[#666]"
+                            class="text-[11px] font-semibold tracking-wide text-muted-foreground"
                         >
                             {{ formatDate(date) }}
                         </span>

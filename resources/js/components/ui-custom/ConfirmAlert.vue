@@ -49,11 +49,11 @@ const submit = (): void => {
                     </span>
                     <div>
                         <AlertDialogTitle
-                            class="text-base font-semibold text-[#111] dark:text-white"
+                            class="text-base font-semibold text-foreground"
                         >
                             {{ props.title }}
                         </AlertDialogTitle>
-                        <AlertDialogDescription class="text-[13px] text-[#999] dark:text-[#666]">
+                        <AlertDialogDescription class="text-[13px] text-muted-foreground">
                             {{ props.description }}
                         </AlertDialogDescription>
                     </div>
@@ -64,7 +64,7 @@ const submit = (): void => {
             <div class="flex items-center justify-end gap-2 px-6 py-4">
                 <button
                     type="button"
-                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-[#555] transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:text-[#999] dark:hover:bg-white/[0.05]"
+                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:hover:bg-white/[0.05]"
                     :disabled="props.requestIsActive"
                     @click="openProxy = false"
                 >

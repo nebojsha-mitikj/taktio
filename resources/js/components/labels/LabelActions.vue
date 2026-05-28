@@ -50,10 +50,10 @@ const deleteLabel = (): void => {
 
         <div
             v-show="open"
-            class="absolute top-[calc(100%+0.5rem)] right-0 z-50 w-40 rounded-md border border-black/[0.08] bg-white py-1 shadow-md dark:border-white/[0.08] dark:bg-[#111]"
+            class="absolute top-[calc(100%+0.5rem)] right-0 z-50 w-40 rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
         >
             <button
-                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 dark:text-[#999] dark:hover:bg-white/5"
+                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                 @click="
                     emit('edit', label);
                     open = false;
@@ -63,7 +63,7 @@ const deleteLabel = (): void => {
                 Edit
             </button>
             <button
-                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 dark:text-[#999] dark:hover:bg-white/5"
+                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                 @click="
                     router.visit('/labels/' + label.id);
                     open = false;

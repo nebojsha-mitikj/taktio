@@ -85,15 +85,15 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
                     <span
                         class="flex size-8 items-center justify-center rounded-lg bg-black/[0.05] dark:bg-white/[0.06]"
                     >
-                        <Tag class="size-4 text-[#555] dark:text-[#aaa]" />
+                        <Tag class="size-4 text-muted-foreground" />
                     </span>
                     <div>
                         <DialogTitle
-                            class="text-base font-semibold text-[#111] dark:text-white"
+                            class="text-base font-semibold text-foreground"
                         >
                             {{ isEditing ? 'Edit label' : 'New label' }}
                         </DialogTitle>
-                        <DialogDescription class="text-[13px] text-[#999] dark:text-[#666]">
+                        <DialogDescription class="text-[13px] text-muted-foreground">
                             {{
                                 isEditing
                                     ? 'Rename this label.'
@@ -103,7 +103,7 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
                     </div>
                 </div>
                 <button
-                    class="flex size-7 cursor-pointer items-center justify-center rounded-lg text-[#aaa] transition-colors hover:bg-black/[0.06] hover:text-[#555] dark:hover:bg-white/[0.06] dark:hover:text-[#ccc]"
+                    class="flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground/60 transition-colors hover:bg-black/[0.06] hover:text-foreground dark:hover:bg-white/[0.06]"
                     @click="open = false"
                 >
                     <X class="size-4" />
@@ -114,13 +114,13 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
             <div class="px-6 py-5">
                 <div class="space-y-1.5">
                     <label
-                        class="text-[12px] font-semibold tracking-wide text-[#888] uppercase dark:text-[#666]"
+                        class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Name</label
                     >
                     <input
                         v-model="name"
                         placeholder="e.g. Work, Personal, Health…"
-                        class="w-full rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-[#111] transition-colors outline-none placeholder:text-[#bbb] focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-white dark:placeholder:text-[#555] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
+                        class="w-full rounded-lg border border-black/[0.1] bg-[#fafafa] px-3 py-2 text-[14px] text-foreground transition-colors outline-none placeholder:text-muted-foreground/50 focus:border-black/30 focus:bg-white dark:border-white/[0.1] dark:bg-white/[0.04] dark:focus:border-white/30 dark:focus:bg-white/[0.06]"
                         @keydown.enter="submit"
                     />
                 </div>
@@ -132,7 +132,7 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
             >
                 <button
                     type="button"
-                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-[#555] transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:text-[#999] dark:hover:bg-white/[0.05]"
+                    class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:hover:bg-white/[0.05]"
                     :disabled="isSubmitting"
                     @click="open = false"
                 >
@@ -140,7 +140,7 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
                 </button>
                 <button
                     type="button"
-                    class="cursor-pointer rounded-lg bg-[#111] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#333] disabled:opacity-40 dark:bg-white dark:text-[#111] dark:hover:bg-neutral-200"
+                    class="cursor-pointer rounded-lg bg-brand px-4 py-2 text-sm font-medium text-page transition-colors hover:bg-brand-hover disabled:opacity-40"
                     :disabled="isSubmitting || !name"
                     @click="submit"
                 >

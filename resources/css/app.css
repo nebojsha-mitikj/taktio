@@ -65,6 +65,7 @@
     --color-brand-hover: #0890c8;
     --color-page: #0c0c0e;
     --color-surface: #111215;
+    --color-elevated: #1a1a1e;
 }
 
 /*
@@ -135,12 +136,12 @@
 .dark {
     --background: #0c0c0e;
     --foreground: #f1f5f9;
-    --card: hsl(0 0% 3.9%);
+    --card: #111215;
     --card-foreground: #f1f5f9;
-    --popover: hsl(0 0% 3.9%);
+    --popover: #111215;
     --popover-foreground: #f1f5f9;
-    --primary: hsl(0 0% 98%);
-    --primary-foreground: hsl(0 0% 9%);
+    --primary: #09A6E9;
+    --primary-foreground: #0c0c0e;
     --secondary: hsl(0 0% 14.9%);
     --secondary-foreground: #f1f5f9;
     --muted: hsl(0 0% 16.08%);
@@ -186,7 +187,7 @@
 }
 
 .dark [data-sonner-toaster] {
-    --normal-bg: #1a1a1a !important;
+    --normal-bg: #1a1a1e !important;
     --normal-border: rgba(255, 255, 255, 0.1) !important;
     --normal-text: #ffffff !important;
 }

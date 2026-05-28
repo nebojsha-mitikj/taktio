@@ -38,11 +38,11 @@ const { tasksByDate, labels } = defineProps<{
             <!-- Page header -->
             <div>
                 <h1
-                    class="text-2xl font-bold tracking-tight text-[#111] dark:text-white"
+                    class="text-2xl font-bold tracking-tight text-foreground"
                 >
                     History
                 </h1>
-                <p class="mt-1 text-sm text-[#888] dark:text-[#666]">
+                <p class="mt-1 text-sm text-muted-foreground">
                     Your completed tasks over time.
                 </p>
             </div>
@@ -56,14 +56,14 @@ const { tasksByDate, labels } = defineProps<{
                 >
                     <div class="flex items-center gap-3">
                         <span
-                            class="text-[11px] font-semibold tracking-wide text-[#999] dark:text-[#666]"
+                            class="text-[11px] font-semibold tracking-wide text-muted-foreground"
                         >
                             {{ formatDate(date) }}
                         </span>
                         <div
                             class="h-px flex-1 bg-black/[0.06] dark:bg-white/[0.06]"
                         />
-                        <span class="text-[11px] text-[#ccc] dark:text-[#555]"
+                        <span class="text-[11px] text-muted-foreground/50"
                             >{{ countCompleted(tasks) }}/{{
                                 tasks.length
                             }}</span

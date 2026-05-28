@@ -37,10 +37,10 @@ const saveMainGoal = (): void => {
 
 <template>
     <div class="space-y-1.5">
-        <p class="text-xs font-semibold uppercase tracking-wider text-[#999] dark:text-[#666]">Main goal</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Main goal</p>
 
         <div
-            class="rounded-xl bg-white shadow-sm ring-1 ring-inset ring-black/[0.07] dark:bg-[#111] dark:ring-white/[0.07]"
+            class="rounded-xl bg-card shadow-sm ring-1 ring-inset ring-black/[0.07] dark:ring-white/[0.07]"
             :class="!isPast && !editingMainGoal ? 'cursor-pointer' : ''"
             @click="!isPast && !editingMainGoal && (editingMainGoal = true, mainGoalDraft = mainGoal ?? '')"
         >
@@ -48,7 +48,7 @@ const saveMainGoal = (): void => {
                 <input
                     v-if="editingMainGoal"
                     v-model="mainGoalDraft"
-                    class="min-w-0 flex-1 bg-transparent p-0 text-[15px] leading-snug text-[#111] focus:outline-none dark:text-white"
+                    class="min-w-0 flex-1 bg-transparent p-0 text-[15px] leading-snug text-foreground focus:outline-none"
                     @blur="saveMainGoal"
                     @keydown.enter="saveMainGoal"
                     @keydown.escape="editingMainGoal = false"
@@ -58,12 +58,12 @@ const saveMainGoal = (): void => {
                 <p
                     v-else
                     class="flex-1 text-[15px] leading-snug"
-                    :class="mainGoal ? 'text-[#111] dark:text-white' : 'text-[#aaa] dark:text-[#555]'"
+                    :class="mainGoal ? 'text-foreground' : 'text-muted-foreground/60'"
                 >
                     {{ mainGoal || (isPast ? 'No main goal was set.' : 'Click to set a main goal…') }}
                 </p>
                 <button
-                    class="shrink-0 cursor-pointer rounded p-1 text-[#888] transition-colors hover:text-[#111] dark:hover:text-white"
+                    class="shrink-0 cursor-pointer rounded p-1 text-muted-foreground transition-colors hover:text-foreground"
                     :class="editingMainGoal ? '' : 'invisible pointer-events-none'"
                     @mousedown.prevent
                     @click.stop="saveMainGoal"

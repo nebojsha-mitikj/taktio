@@ -25,9 +25,9 @@ const { isMatch: isTodayMatch } = usePageMatch('tasks/Today');
 const { isMatch: isHistoryMatch } = usePageMatch('tasks/History');
 
 const priorityDot: Record<TaskPriority, string> = {
-    [TaskPriority.HIGH]:   'bg-[#444] dark:bg-[#bbb]',
-    [TaskPriority.MEDIUM]: 'bg-[#999] dark:bg-[#777]',
-    [TaskPriority.LOW]:    'bg-[#ccc] dark:bg-[#444]',
+    [TaskPriority.HIGH]:   'bg-[#F4823A]',
+    [TaskPriority.MEDIUM]: 'bg-brand',
+    [TaskPriority.LOW]:    'bg-muted-foreground/40',
     [TaskPriority.NONE]:   'bg-transparent',
 };
 </script>

@@ -55,10 +55,10 @@ const navigate = (): void => {
             <div class="space-y-1">
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h1 class="text-2xl font-bold tracking-tight text-[#111] dark:text-white">
+                        <h1 class="text-2xl font-bold tracking-tight text-foreground">
                             {{ pageTitle }}
                         </h1>
-                        <p class="mt-0.5 text-sm text-[#888] dark:text-[#666]">Your goals for the month.</p>
+                        <p class="mt-0.5 text-sm text-muted-foreground">Your goals for the month.</p>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -85,7 +85,7 @@ const navigate = (): void => {
                     </div>
                 </div>
 
-                <p v-if="isPast" class="text-sm text-[#aaa] dark:text-[#555]">
+                <p v-if="isPast" class="text-sm text-muted-foreground/60">
                     This month is in the past — view only.
                 </p>
             </div>
@@ -93,10 +93,10 @@ const navigate = (): void => {
             <!-- No plan for past month -->
             <div
                 v-if="!plan"
-                class="rounded-xl bg-white px-6 py-12 text-center shadow-sm ring-1 ring-inset ring-black/[0.07] dark:bg-[#111] dark:ring-white/[0.07]"
+                class="rounded-xl bg-card px-6 py-12 text-center shadow-sm ring-1 ring-inset ring-black/[0.07] dark:ring-white/[0.07]"
             >
-                <p class="text-[15px] font-semibold text-[#111] dark:text-white">No plan for this month</p>
-                <p class="mt-1 text-sm text-[#999] dark:text-[#666]">Nothing was planned here.</p>
+                <p class="text-[15px] font-semibold text-foreground">No plan for this month</p>
+                <p class="mt-1 text-sm text-muted-foreground">Nothing was planned here.</p>
             </div>
 
             <template v-else>

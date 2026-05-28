@@ -132,10 +132,10 @@ const onDelete = (): void => {
 
         <div
             v-show="open"
-            class="absolute top-[calc(100%+0.5rem)] right-0 z-50 w-48 rounded-md border border-black/[0.08] bg-white py-1 shadow-md dark:border-white/[0.08] dark:bg-[#111]"
+            class="absolute top-[calc(100%+0.5rem)] right-0 z-50 w-48 rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
         >
             <button
-                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 disabled:opacity-50 dark:text-[#999] dark:hover:bg-white/5"
+                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 disabled:opacity-50 dark:hover:bg-white/5"
                 :disabled="isToggling"
                 @click="
                     toggleTemplate();
@@ -150,7 +150,7 @@ const onDelete = (): void => {
             </button>
 
             <button
-                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 dark:text-[#999] dark:hover:bg-white/5"
+                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                 @click="
                     emit('edit', template);
                     open = false;
@@ -166,7 +166,7 @@ const onDelete = (): void => {
                 @mouseleave="labelsOpen = false"
             >
                 <button
-                    class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 dark:text-[#999] dark:hover:bg-white/5"
+                    class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                 >
                     <Tag class="size-3.5" />
                     Labels
@@ -175,12 +175,12 @@ const onDelete = (): void => {
 
                 <div
                     v-show="labelsOpen"
-                    class="absolute top-0 right-full z-50 w-48 rounded-md border border-black/[0.08] bg-white py-1 shadow-md dark:border-white/[0.08] dark:bg-[#111]"
+                    class="absolute top-0 right-full z-50 w-48 rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
                 >
                     <button
                         v-for="label in labels"
                         :key="label.id"
-                        class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-[#555] transition-colors hover:bg-black/5 dark:text-[#999] dark:hover:bg-white/5"
+                        class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                         @click="toggleLabel(label.id)"
                     >
                         <Check
@@ -192,7 +192,7 @@ const onDelete = (): void => {
                     </button>
                     <span
                         v-if="!labels.length"
-                        class="block px-3 py-1.5 text-sm text-[#999] dark:text-[#666]"
+                        class="block px-3 py-1.5 text-sm text-muted-foreground"
                         >No labels</span
                     >
                 </div>

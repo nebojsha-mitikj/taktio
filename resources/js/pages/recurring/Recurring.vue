@@ -35,17 +35,17 @@ const { labels, templates } = defineProps<{
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                     <h1
-                        class="text-2xl font-bold tracking-tight text-[#111] dark:text-white"
+                        class="text-2xl font-bold tracking-tight text-foreground"
                     >
                         Recurring tasks
                     </h1>
-                    <p class="mt-1 text-sm text-[#888] dark:text-[#666]">
+                    <p class="mt-1 text-sm text-muted-foreground">
                         Tasks that repeat on a schedule so you never forget.
                     </p>
                 </div>
                 <button
                     @click="($event.currentTarget as HTMLElement).blur(); createTemplate()"
-                    class="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-black/[0.1] bg-white px-3 py-1.5 text-sm font-medium text-[#333] shadow-sm transition-colors hover:bg-black/[0.04] sm:w-auto sm:justify-start dark:border-white/[0.1] dark:bg-[#1a1a1a] dark:text-[#ccc] dark:hover:bg-white/[0.06]"
+                    class="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-black/[0.1] bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-black/[0.04] sm:w-auto sm:justify-start dark:border-white/[0.1] dark:bg-elevated dark:hover:bg-white/[0.06]"
                 >
                     <Plus class="size-3.5" />
                     Add recurring
@@ -54,14 +54,14 @@ const { labels, templates } = defineProps<{
 
             <div
                 v-if="templates.length === 0"
-                class="rounded-xl border border-black/[0.07] bg-white px-6 py-12 text-center shadow-sm dark:border-white/[0.07] dark:bg-[#111]"
+                class="rounded-xl border border-black/[0.07] bg-card px-6 py-12 text-center shadow-sm dark:border-white/[0.07]"
             >
                 <p
-                    class="text-[15px] font-semibold text-[#111] dark:text-white"
+                    class="text-[15px] font-semibold text-foreground"
                 >
                     No recurring tasks yet
                 </p>
-                <p class="mt-1 text-sm text-[#999] dark:text-[#666]">
+                <p class="mt-1 text-sm text-muted-foreground">
                     Add one to keep your habits on track.
                 </p>
             </div>

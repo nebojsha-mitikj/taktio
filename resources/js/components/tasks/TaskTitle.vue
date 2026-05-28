@@ -13,8 +13,8 @@ const props = defineProps<{
         <p
             class="text-[15px] font-medium leading-snug"
             :class="props.task.status === TaskStatus.COMPLETED
-                ? 'text-[#bbb] line-through dark:text-[#555]'
-                : 'text-[#111] dark:text-white'"
+                ? 'text-muted-foreground/50 line-through'
+                : 'text-foreground'"
         >
             {{ props.task.title }}
         </p>

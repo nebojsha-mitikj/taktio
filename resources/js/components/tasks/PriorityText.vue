@@ -6,9 +6,9 @@ const { priority } = defineProps<{
 }>();
 
 const badgeClass: Record<TaskPriority, string> = {
-    [TaskPriority.HIGH]:   'bg-black/[0.07] text-[#333] border-black/[0.09] dark:bg-white/[0.1] dark:text-[#ccc] dark:border-white/[0.1]',
-    [TaskPriority.MEDIUM]: 'bg-black/[0.04] text-[#555] border-black/[0.06] dark:bg-white/[0.05] dark:text-[#999] dark:border-white/[0.06]',
-    [TaskPriority.LOW]:    'bg-black/[0.03] text-[#888] border-black/[0.04] dark:bg-white/[0.03] dark:text-[#666] dark:border-white/[0.04]',
+    [TaskPriority.HIGH]:   'bg-[#F4823A]/15 text-[#F4823A] border-[#F4823A]/20',
+    [TaskPriority.MEDIUM]: 'bg-brand/10 text-brand border-brand/20',
+    [TaskPriority.LOW]:    'bg-black/[0.04] text-muted-foreground border-black/[0.06] dark:bg-white/[0.03] dark:border-white/[0.04]',
     [TaskPriority.NONE]:   '',
 };
 

@@ -80,7 +80,7 @@ function onLabelsChevronClick() {
 
 <template>
     <header
-        class="sticky top-0 z-10 border-b border-black/[0.06] bg-[#f7f7f5]/90 backdrop-blur-md dark:border-white/[0.06] dark:bg-[#0c0c0b]/90"
+        class="sticky top-0 z-10 border-b border-black/[0.06] bg-background/80 backdrop-blur-md dark:border-white/[0.06] dark:bg-page/80"
     >
         <div
             class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 sm:px-8"
@@ -101,8 +101,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         isCurrentRoute(item)
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                 >
                     <component :is="item.icon" class="size-3.5" />
@@ -119,8 +119,8 @@ function onLabelsChevronClick() {
                         class="flex items-center rounded-md transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                         :class="
                             isMoreActive
-                                ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                                : 'text-[#555] dark:text-[#888]'
+                                ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                                : 'text-muted-foreground'
                         "
                     >
                         <Link
@@ -147,15 +147,15 @@ function onLabelsChevronClick() {
 
                     <div
                         v-show="moreOpen"
-                        class="absolute top-[calc(100%+0.5rem)] left-0 z-50 w-36 rounded-md border border-black/[0.08] bg-white py-1 shadow-md dark:border-white/[0.08] dark:bg-[#111]"
+                        class="absolute top-[calc(100%+0.5rem)] left-0 z-50 w-36 rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
                     >
                         <Link
                             :href="upcoming()"
                             class="flex items-center gap-2 px-3 py-1.5 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                             :class="
                                 urlIsActive(upcoming(), page.url)
-                                    ? 'text-[#111] dark:text-white'
-                                    : 'text-[#555] dark:text-[#999]'
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground'
                             "
                             @click="moreOpen = false"
                         >
@@ -167,8 +167,8 @@ function onLabelsChevronClick() {
                             class="flex items-center gap-2 px-3 py-1.5 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                             :class="
                                 urlIsActive(history(), page.url)
-                                    ? 'text-[#111] dark:text-white'
-                                    : 'text-[#555] dark:text-[#999]'
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground'
                             "
                             @click="moreOpen = false"
                         >
@@ -184,8 +184,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         urlIsActive(recurringTemplates(), page.url)
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                 >
                     <Repeat class="size-3.5" />
@@ -198,8 +198,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         page.url.startsWith('/plan')
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                 >
                     <LayoutList class="size-3.5" />
@@ -216,8 +216,8 @@ function onLabelsChevronClick() {
                         class="flex items-center rounded-md transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                         :class="
                             page.url.startsWith('/labels')
-                                ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                                : 'text-[#555] dark:text-[#888]'
+                                ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                                : 'text-muted-foreground'
                         "
                     >
                         <Link
@@ -245,7 +245,7 @@ function onLabelsChevronClick() {
 
                     <div
                         v-show="labelsOpen"
-                        class="absolute top-[calc(100%+0.5rem)] left-0 z-50 w-48 rounded-md border border-black/[0.08] bg-white py-1 shadow-md dark:border-white/[0.08] dark:bg-[#111]"
+                        class="absolute top-[calc(100%+0.5rem)] left-0 z-50 w-48 rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
                     >
                         <Link
                             v-for="label in labels"
@@ -254,8 +254,8 @@ function onLabelsChevronClick() {
                             class="flex items-center gap-2 px-3 py-1.5 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                             :class="
                                 toUrl(getLabel(label.id)) === page.url
-                                    ? 'text-[#111] dark:text-white'
-                                    : 'text-[#555] dark:text-[#999]'
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground'
                             "
                             @click="labelsOpen = false"
                         >
@@ -271,8 +271,8 @@ function onLabelsChevronClick() {
                             class="flex items-center gap-2 px-3 py-1.5 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                             :class="
                                 toUrl(getLabels()) === page.url
-                                    ? 'text-[#111] dark:text-white'
-                                    : 'text-[#555] dark:text-[#999]'
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground'
                             "
                             @click="labelsOpen = false"
                         >
@@ -289,7 +289,7 @@ function onLabelsChevronClick() {
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <button
-                            class="flex size-8 cursor-pointer items-center justify-center rounded-full border border-black/[0.1] bg-white text-xs font-semibold text-[#333] transition-colors hover:bg-black/[0.04] dark:border-white/[0.1] dark:bg-[#1a1a1a] dark:text-[#ccc] dark:hover:bg-white/[0.06]"
+                            class="flex size-8 cursor-pointer items-center justify-center rounded-full border border-black/[0.1] bg-card text-xs font-semibold text-foreground transition-colors hover:bg-black/[0.04] dark:border-white/[0.1] dark:bg-elevated dark:hover:bg-white/[0.06]"
                         >
                             {{ getInitials(auth.user?.name) }}
                         </button>
@@ -323,8 +323,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         isCurrentRoute(item)
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -336,8 +336,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         urlIsActive(upcoming(), page.url)
-                            ? 'text-[#111] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -349,8 +349,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         urlIsActive(history(), page.url)
-                            ? 'text-[#111] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -362,8 +362,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         urlIsActive(recurringTemplates(), page.url)
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -375,8 +375,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         page.url.startsWith('/plan')
-                            ? 'bg-black/[0.06] text-[#111] dark:bg-white/[0.08] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'bg-black/[0.06] text-foreground dark:bg-white/[0.08] dark:text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -393,8 +393,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         toUrl(getLabel(label.id)) === page.url
-                            ? 'text-[#111] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
@@ -406,8 +406,8 @@ function onLabelsChevronClick() {
                     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
                     :class="
                         toUrl(getLabels()) === page.url
-                            ? 'text-[#111] dark:text-white'
-                            : 'text-[#555] dark:text-[#888]'
+                            ? 'text-foreground'
+                            : 'text-muted-foreground'
                     "
                     @click="mobileOpen = false"
                 >
