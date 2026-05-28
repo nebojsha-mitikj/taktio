@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\TaskPriorityEnum;
-use App\Enums\TaskStatusEnum;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,7 +21,7 @@ class TaskFactory extends Factory
             'title' => fake()->sentence(3),
             'description' => null,
             'date' => now()->toDateString(),
-            'status' => TaskStatusEnum::TO_DO,
+            'completed' => false,
             'priority' => TaskPriorityEnum::NONE,
             'recurring_task_template_id' => null,
         ];
@@ -40,11 +39,6 @@ class TaskFactory extends Factory
 
     public function completed(): static
     {
-        return $this->state(['status' => TaskStatusEnum::COMPLETED]);
-    }
-
-    public function inProgress(): static
-    {
-        return $this->state(['status' => TaskStatusEnum::IN_PROGRESS]);
+        return $this->state(['completed' => true]);
     }
 }

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Tasks;
 
 use App\Enums\TaskPriorityEnum;
-use App\Enums\TaskStatusEnum;
 use App\Models\Label;
 use App\Models\RecurringTaskTemplate;
 use App\Models\Task;
@@ -180,7 +179,7 @@ class TaskTest extends TestCase
             'user_id' => $user->id,
             'title' => 'Write tests',
             'priority' => TaskPriorityEnum::MEDIUM->value,
-            'status' => TaskStatusEnum::TO_DO->value,
+            'completed' => false,
         ]);
     }
 
@@ -309,43 +308,43 @@ class TaskTest extends TestCase
         $this->assertTrue($task->fresh()->labels->contains($label));
     }
 
-    // Update status
+    // Update completed
 
-    public function test_update_status_changes_task_status(): void
+    public function test_update_completed_marks_task_as_done(): void
     {
         $user = $this->user();
         $task = Task::factory()->dueToday()->create(['user_id' => $user->id]);
 
-        $response = $this->actingAs($user)->put(route('tasks.status.update', $task), [
-            'status' => TaskStatusEnum::COMPLETED->value,
+        $response = $this->actingAs($user)->put(route('tasks.completed.update', $task), [
+            'completed' => true,
         ]);
 
         $response->assertRedirect();
-        $this->assertEquals(TaskStatusEnum::COMPLETED, $task->fresh()->status);
+        $this->assertTrue($task->fresh()->completed);
     }
 
-    public function test_update_status_rejects_non_today_task(): void
+    public function test_update_completed_rejects_non_today_task(): void
     {
         $user = $this->user();
         $task = Task::factory()->dueTomorrow()->create(['user_id' => $user->id]);
 
-        $response = $this->actingAs($user)->put(route('tasks.status.update', $task), [
-            'status' => TaskStatusEnum::COMPLETED->value,
+        $response = $this->actingAs($user)->put(route('tasks.completed.update', $task), [
+            'completed' => true,
         ]);
 
         $response->assertForbidden();
     }
 
-    public function test_update_status_rejects_invalid_enum_value(): void
+    public function test_update_completed_rejects_non_boolean_value(): void
     {
         $user = $this->user();
         $task = Task::factory()->dueToday()->create(['user_id' => $user->id]);
 
-        $response = $this->actingAs($user)->put(route('tasks.status.update', $task), [
-            'status' => 'not-a-real-status',
+        $response = $this->actingAs($user)->put(route('tasks.completed.update', $task), [
+            'completed' => 'not-a-boolean',
         ]);
 
-        $response->assertSessionHasErrors('status');
+        $response->assertSessionHasErrors('completed');
     }
 
     // Update labels
@@ -413,7 +412,7 @@ class TaskTest extends TestCase
             'user_id' => $user->id,
             'recurring_task_template_id' => $template->id,
             'title' => $template->title,
-            'status' => TaskStatusEnum::TO_DO->value,
+            'completed' => false,
         ]);
     }
 

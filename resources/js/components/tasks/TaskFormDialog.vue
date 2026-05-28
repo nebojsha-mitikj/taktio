@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { store, update } from '@/actions/App/Http/Controllers/TaskController';
 import { Calendar } from '@/components/ui/calendar';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import {
     Popover,
     PopoverContent,
@@ -153,9 +158,7 @@ const submitRequest = (payload: RequestPayload & CreateTaskPayload): void => {
                     <span
                         class="flex size-8 items-center justify-center rounded-lg bg-black/[0.05] dark:bg-white/[0.06]"
                     >
-                        <SquareCheck
-                            class="size-4 text-muted-foreground"
-                        />
+                        <SquareCheck class="size-4 text-muted-foreground" />
                     </span>
                     <div>
                         <DialogTitle
@@ -163,7 +166,9 @@ const submitRequest = (payload: RequestPayload & CreateTaskPayload): void => {
                         >
                             {{ isEditing ? 'Edit task' : 'New task' }}
                         </DialogTitle>
-                        <DialogDescription class="text-[13px] text-muted-foreground">
+                        <DialogDescription
+                            class="text-[13px] text-muted-foreground"
+                        >
                             {{
                                 isEditing
                                     ? 'Update the details below.'
@@ -200,7 +205,8 @@ const submitRequest = (payload: RequestPayload & CreateTaskPayload): void => {
                     <label
                         class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Description
-                        <span class="font-normal text-muted-foreground/60 normal-case"
+                        <span
+                            class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -295,7 +301,8 @@ const submitRequest = (payload: RequestPayload & CreateTaskPayload): void => {
                     <label
                         class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Labels
-                        <span class="font-normal text-muted-foreground/60 normal-case"
+                        <span
+                            class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -318,7 +325,12 @@ const submitRequest = (payload: RequestPayload & CreateTaskPayload): void => {
                                 >
                                     {{ label.name }}
                                 </SelectItem>
-                                <p v-if="!labels.length" class="px-3 py-2 text-sm text-muted-foreground">No labels yet.</p>
+                                <p
+                                    v-if="!labels.length"
+                                    class="px-3 py-2 text-sm text-muted-foreground"
+                                >
+                                    No labels yet.
+                                </p>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

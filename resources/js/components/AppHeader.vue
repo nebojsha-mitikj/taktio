@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { index as planIndex } from '@/actions/App/Http/Controllers/PlanController';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,7 +9,6 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { show as getLabel, index as getLabels } from '@/routes/labels';
-import { index as planIndex } from '@/actions/App/Http/Controllers/PlanController';
 import { index as recurringTemplates } from '@/routes/recurring';
 import { history, today, upcoming } from '@/routes/tasks';
 import type { AppPageProps, NavItem } from '@/types';
@@ -60,7 +60,10 @@ function onMoreChevronTouch() {
     moreOpen.value = !moreOpen.value;
 }
 function onMoreChevronClick() {
-    if (touchHandledMore) { touchHandledMore = false; return; }
+    if (touchHandledMore) {
+        touchHandledMore = false;
+        return;
+    }
     moreOpen.value = !moreOpen.value;
 }
 
@@ -73,7 +76,10 @@ function onLabelsChevronTouch() {
     labelsOpen.value = !labelsOpen.value;
 }
 function onLabelsChevronClick() {
-    if (touchHandledLabels) { touchHandledLabels = false; return; }
+    if (touchHandledLabels) {
+        touchHandledLabels = false;
+        return;
+    }
     labelsOpen.value = !labelsOpen.value;
 }
 </script>
@@ -125,7 +131,7 @@ function onLabelsChevronClick() {
                     >
                         <Link
                             :href="upcoming()"
-                            class="flex items-center gap-1.5 rounded-l-md py-1.5 pl-3 pr-2 text-sm font-medium outline-none"
+                            class="flex items-center gap-1.5 rounded-l-md py-1.5 pr-2 pl-3 text-sm font-medium outline-none"
                         >
                             <Clock class="size-3.5" />
                             Timeline
@@ -222,7 +228,7 @@ function onLabelsChevronClick() {
                     >
                         <Link
                             :href="getLabels()"
-                            class="flex items-center gap-1.5 rounded-l-md py-1.5 pl-3 pr-2 text-sm font-medium outline-none"
+                            class="flex items-center gap-1.5 rounded-l-md py-1.5 pr-2 pl-3 text-sm font-medium outline-none"
                         >
                             <Tag class="size-3.5" />
                             Labels

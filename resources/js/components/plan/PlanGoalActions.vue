@@ -25,7 +25,10 @@ const onEllipsisTouch = (): void => {
 };
 
 const onEllipsisClick = (): void => {
-    if (touchHandled) { touchHandled = false; return; }
+    if (touchHandled) {
+        touchHandled = false;
+        return;
+    }
     open.value = !open.value;
 };
 
@@ -33,7 +36,9 @@ const onDelete = (): void => {
     isDeleting.value = true;
     router.delete(destroyGoal(goal.id).url, {
         preserveScroll: true,
-        onFinish: () => { isDeleting.value = false; },
+        onFinish: () => {
+            isDeleting.value = false;
+        },
     });
 };
 </script>
@@ -53,26 +58,33 @@ const onDelete = (): void => {
             <Ellipsis class="size-4 text-muted-foreground/50" />
         </button>
 
-        <div
-            v-show="open"
-            class="absolute right-0 top-full z-50 w-36 pt-2"
-        >
-            <div class="rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]">
+        <div v-show="open" class="absolute top-full right-0 z-50 w-36 pt-2">
+            <div
+                class="rounded-md border border-black/[0.08] bg-card py-1 shadow-md dark:border-white/[0.08]"
+            >
                 <button
                     class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
-                    @click="emit('edit'); open = false"
+                    @click="
+                        emit('edit');
+                        open = false;
+                    "
                 >
                     <Pencil class="size-3.5" />
                     Edit
                 </button>
                 <button
                     class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-black/5 dark:hover:bg-white/5"
-                    @click="emit('add-step'); open = false"
+                    @click="
+                        emit('add-step');
+                        open = false;
+                    "
                 >
                     <Plus class="size-3.5" />
                     Add step
                 </button>
-                <div class="my-1 border-t border-black/[0.06] dark:border-white/[0.06]" />
+                <div
+                    class="my-1 border-t border-black/[0.06] dark:border-white/[0.06]"
+                />
                 <button
                     class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-red-600 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-950/30"
                     :disabled="isDeleting"

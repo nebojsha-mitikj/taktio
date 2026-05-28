@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\TaskPriorityEnum;
-use App\Enums\TaskStatusEnum;
 use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,7 +22,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property string $title
  * @property string|null $description
  * @property Carbon $date
- * @property TaskStatusEnum $status
+ * @property bool $completed
  * @property TaskPriorityEnum $priority
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -48,12 +47,12 @@ class Task extends Model
         'title',
         'description',
         'date',
-        'status',
+        'completed',
         'priority',
     ];
 
     protected $casts = [
-        'status' => TaskStatusEnum::class,
+        'completed' => 'boolean',
         'priority' => TaskPriorityEnum::class,
         'date' => 'date:Y-m-d',
     ];
@@ -76,24 +75,18 @@ class Task extends Model
 
     public function scopeOrdered(Builder $query, bool $latestFirst = false): Builder
     {
-        $statusOrder = TaskStatusEnum::ordered();
-        $cases = collect($statusOrder)
-            ->map(fn ($value, $i) => "WHEN '{$value}' THEN {$i}")
-            ->implode(' ');
-
         return $query
             ->orderBy('date', $latestFirst ? 'DESC' : 'ASC')
-            ->orderByRaw("CASE status {$cases} END")
+            ->orderBy('completed', 'asc')
             ->orderBy('priority', 'desc')
             ->orderBy('created_at', 'desc');
     }
 
     public static function sortCollection(SupportCollection $tasks): SupportCollection
     {
-        $statusOrder = array_flip(TaskStatusEnum::ordered());
         $priorityOrder = array_flip(TaskPriorityEnum::ordered());
 
-        return $tasks->sort(function ($a, $b) use ($statusOrder, $priorityOrder) {
+        return $tasks->sort(function ($a, $b) use ($priorityOrder) {
             $dateA = $a->date->timestamp;
             $dateB = $b->date->timestamp;
 
@@ -101,11 +94,8 @@ class Task extends Model
                 return $dateA <=> $dateB;
             }
 
-            $statusA = $statusOrder[$a->status->value];
-            $statusB = $statusOrder[$b->status->value];
-
-            if ($statusA !== $statusB) {
-                return $statusA <=> $statusB;
+            if ($a->completed !== $b->completed) {
+                return $a->completed <=> $b->completed;
             }
 
             $priorityA = $priorityOrder[$a->priority->value];

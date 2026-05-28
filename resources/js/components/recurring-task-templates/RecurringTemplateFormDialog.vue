@@ -3,7 +3,12 @@ import {
     store,
     update,
 } from '@/actions/App/Http/Controllers/RecurringTaskTemplateController';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import {
     Select,
     SelectContent,
@@ -100,7 +105,8 @@ const recurLabels: Record<TaskRecur, string> = {
 };
 
 const submit = (): void => {
-    if (!title.value.trim() || priority.value === '' || recur.value == null) return;
+    if (!title.value.trim() || priority.value === '' || recur.value == null)
+        return;
     if (isSubmitting.value) return;
     submitRequest({
         title: title.value,
@@ -161,7 +167,9 @@ const submitRequest = (
                                     : 'New recurring task'
                             }}
                         </DialogTitle>
-                        <DialogDescription class="text-[13px] text-muted-foreground">
+                        <DialogDescription
+                            class="text-[13px] text-muted-foreground"
+                        >
                             {{
                                 isEditing
                                     ? 'Update the recurrence settings.'
@@ -198,7 +206,8 @@ const submitRequest = (
                     <label
                         class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Description
-                        <span class="font-normal text-muted-foreground/60 normal-case"
+                        <span
+                            class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -279,7 +288,7 @@ const submitRequest = (
                             type="button"
                             @click="
                                 weekdays = weekdays.includes(day)
-                                    ? weekdays.filter(d => d !== day)
+                                    ? weekdays.filter((d) => d !== day)
                                     : [...weekdays, day]
                             "
                             class="rounded-lg border px-3 py-1.5 text-[12px] font-semibold transition-colors"
@@ -299,7 +308,8 @@ const submitRequest = (
                     <label
                         class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
                         >Labels
-                        <span class="font-normal text-muted-foreground/60 normal-case"
+                        <span
+                            class="font-normal text-muted-foreground/60 normal-case"
                             >(optional)</span
                         ></label
                     >
@@ -322,7 +332,12 @@ const submitRequest = (
                                 >
                                     {{ label.name }}
                                 </SelectItem>
-                                <p v-if="!labels.length" class="px-3 py-2 text-sm text-muted-foreground">No labels yet.</p>
+                                <p
+                                    v-if="!labels.length"
+                                    class="px-3 py-2 text-sm text-muted-foreground"
+                                >
+                                    No labels yet.
+                                </p>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

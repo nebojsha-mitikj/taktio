@@ -30,6 +30,8 @@ const emit = defineEmits<{
         class="rounded-xl border border-black/[0.07] bg-card px-6 py-12 text-center shadow-sm dark:border-white/[0.07]"
     >
         <p class="text-[15px] font-semibold text-foreground">No labels yet</p>
-        <p class="mt-1 text-sm text-muted-foreground">Create one to organize your tasks.</p>
+        <p class="mt-1 text-sm text-muted-foreground">
+            Create one to organize your tasks.
+        </p>
     </div>
 </template>

@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Enums\TaskStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 /**
  * @property string $date
- * @property string|null $status
+ * @property bool|null $completed
  */
 class MaterializeRequest extends FormRequest
 {
@@ -18,7 +16,7 @@ class MaterializeRequest extends FormRequest
     {
         return [
             'date' => ['required', 'date'],
-            'status' => ['nullable', new Enum(TaskStatusEnum::class)],
+            'completed' => ['nullable', 'boolean'],
         ];
     }
 }

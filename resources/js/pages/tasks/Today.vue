@@ -11,7 +11,7 @@ import type { Label } from '@/types/labels/Label';
 import { type Task } from '@/types/tasks/Task';
 import { countCompleted } from '@/utils/taskCounts';
 import { Head } from '@inertiajs/vue3';
-import { today as intlToday, getLocalTimeZone } from '@internationalized/date';
+import { getLocalTimeZone, today as intlToday } from '@internationalized/date';
 import { computed } from 'vue';
 
 const { dialogOpen, editingTask, editTask, createTask } = useTaskDialog();
@@ -72,9 +72,7 @@ const allDone = computed(
                 </div>
 
                 <!-- Progress bar -->
-                <div
-                    class="h-1.5 w-full overflow-hidden rounded-full bg-muted"
-                >
+                <div class="h-1.5 w-full overflow-hidden rounded-full bg-muted">
                     <div
                         class="h-full rounded-full transition-all duration-700 ease-out"
                         :class="allDone ? 'bg-emerald-500' : 'bg-brand'"

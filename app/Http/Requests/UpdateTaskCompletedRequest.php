@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Enums\TaskStatusEnum;
 use App\Models\Task;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 /**
- * @property TaskStatusEnum $status
+ * @property bool $completed
  */
-class UpdateStatusRequest extends FormRequest
+class UpdateTaskCompletedRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -25,7 +23,7 @@ class UpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => ['required', new Enum(TaskStatusEnum::class)],
+            'completed' => ['required', 'boolean'],
         ];
     }
 }

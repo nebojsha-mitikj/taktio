@@ -4,6 +4,6 @@ export const formatDate = (date: string): string => {
         month: 'short',
         day: 'numeric',
     });
-}
+};
 
 export const toDate = (iso: string) => iso.slice(0, 10);

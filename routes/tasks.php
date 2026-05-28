@@ -8,8 +8,8 @@ Route::group(['middleware' => 'auth'], static function () {
     Route::get('/upcoming', [TaskController::class, 'upcoming'])->name('tasks.upcoming');
     Route::get('/history', [TaskController::class, 'history'])->name('tasks.history');
 
-    Route::put('/tasks/{task}/status', [TaskController::class, 'updateStatus'])
-        ->name('tasks.status.update')
+    Route::put('/tasks/{task}/completed', [TaskController::class, 'updateCompleted'])
+        ->name('tasks.completed.update')
         ->middleware('can:update,task');
 
     Route::put('/tasks/{task}/labels', [TaskController::class, 'updateLabels'])

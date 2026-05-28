@@ -9,7 +9,9 @@ const { template } = defineProps<{
 
 <template>
     <div class="flex items-center gap-2">
-        <p class="text-[15px] font-medium text-foreground">{{ template.title }}</p>
+        <p class="text-[15px] font-medium text-foreground">
+            {{ template.title }}
+        </p>
         <StatusBadge :variant="template.is_active ? 'green' : 'gray'">
             {{ template.is_active ? 'Active' : 'Inactive' }}
         </StatusBadge>

@@ -7,7 +7,8 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { initializeTheme } from './composables/useAppearance';
 
-axios.defaults.headers.common['X-Timezone'] = Intl.DateTimeFormat().resolvedOptions().timeZone;
+axios.defaults.headers.common['X-Timezone'] =
+    Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const appName = import.meta.env.VITE_APP_NAME || 'Taktio';
 

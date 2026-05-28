@@ -37,9 +37,7 @@ const { tasksByDate, labels } = defineProps<{
         <div v-else class="mx-auto my-8 w-full max-w-4xl space-y-8">
             <!-- Page header -->
             <div>
-                <h1
-                    class="text-2xl font-bold tracking-tight text-foreground"
-                >
+                <h1 class="text-2xl font-bold tracking-tight text-foreground">
                     History
                 </h1>
                 <p class="mt-1 text-sm text-muted-foreground">

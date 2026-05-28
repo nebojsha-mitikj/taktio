@@ -61,7 +61,7 @@
     --color-sidebar-ring: var(--sidebar-ring);
 
     /* Taktio brand tokens */
-    --color-brand: #09A6E9;
+    --color-brand: #09a6e9;
     --color-brand-hover: #0890c8;
     --color-page: #0c0c0e;
     --color-surface: #111215;
@@ -140,7 +140,7 @@
     --card-foreground: #f1f5f9;
     --popover: #111215;
     --popover-foreground: #f1f5f9;
-    --primary: #09A6E9;
+    --primary: #09a6e9;
     --primary-foreground: #0c0c0e;
     --secondary: hsl(0 0% 14.9%);
     --secondary-foreground: #f1f5f9;

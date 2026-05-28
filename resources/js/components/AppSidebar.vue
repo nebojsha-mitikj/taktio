@@ -10,14 +10,14 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { today, upcoming, history } from '@/routes/tasks';
+import { show as getLabel, index as getLabels } from '@/routes/labels';
 import { index as recurringTemplates } from '@/routes/recurring';
-import { index as getLabels, show as getLabel } from '@/routes/labels';
-import { type NavSection, type AppPageProps } from '@/types';
+import { history, today, upcoming } from '@/routes/tasks';
+import { type AppPageProps, type NavSection } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { Calendar, Star, Repeat, History, Tag, Circle } from 'lucide-vue-next';
-import AppLogo from './AppLogo.vue';
+import { Calendar, Circle, History, Repeat, Star, Tag } from 'lucide-vue-next';
 import { computed } from 'vue';
+import AppLogo from './AppLogo.vue';
 
 type Label = {
     id: number;
@@ -40,7 +40,7 @@ const navSections = computed<NavSection[]>(() => [
                 href: upcoming(),
                 icon: Calendar,
             },
-        ]
+        ],
     },
 
     {
@@ -50,8 +50,8 @@ const navSections = computed<NavSection[]>(() => [
                 title: 'Recurring',
                 href: recurringTemplates(),
                 icon: Repeat,
-            }
-        ]
+            },
+        ],
     },
 
     {
@@ -62,7 +62,7 @@ const navSections = computed<NavSection[]>(() => [
                 href: history(),
                 icon: History,
             },
-        ]
+        ],
     },
 
     {
@@ -78,10 +78,9 @@ const navSections = computed<NavSection[]>(() => [
                 href: getLabels(),
                 icon: Tag,
             },
-        ]
-    }
+        ],
+    },
 ]);
-
 </script>
 
 <template>
@@ -103,7 +102,8 @@ const navSections = computed<NavSection[]>(() => [
                 v-for="section in navSections"
                 :key="section.title"
                 :items="section.items"
-                :title="section.title"/>
+                :title="section.title"
+            />
         </SidebarContent>
 
         <SidebarFooter>

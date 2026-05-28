@@ -41,15 +41,18 @@ let touchHandledOpen = false;
 const onOpenMouseEnter = (): void => {
     if (touchHandledOpen) return;
     open.value = true;
-}
+};
 const onEllipsisTouch = (): void => {
     touchHandledOpen = true;
     open.value = !open.value;
-}
+};
 const onEllipsisClick = (): void => {
-    if (touchHandledOpen) { touchHandledOpen = false; return; }
+    if (touchHandledOpen) {
+        touchHandledOpen = false;
+        return;
+    }
     open.value = !open.value;
-}
+};
 const isToggling = ref(false);
 const isDeleting = ref(false);
 const showAlert = ref(false);

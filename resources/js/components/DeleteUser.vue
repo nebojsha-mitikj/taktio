@@ -18,9 +18,13 @@ const open = ref(false);
             title="Delete account"
             description="Delete your account and all of its resources"
         />
-        <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
+        <div
+            class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
+        >
             <div class="space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
+                <p class="text-sm">
+                    Please proceed with caution, this cannot be undone.
+                </p>
             </div>
             <button
                 type="button"
@@ -46,22 +50,33 @@ const open = ref(false);
                 v-slot="{ errors, processing, reset, clearErrors }"
             >
                 <!-- Header -->
-                <div class="border-b border-black/[0.06] px-6 py-5 dark:border-white/[0.06]">
+                <div
+                    class="border-b border-black/[0.06] px-6 py-5 dark:border-white/[0.06]"
+                >
                     <div class="flex items-center gap-3">
-                        <span class="flex size-8 items-center justify-center rounded-lg bg-red-50 dark:bg-red-500/10">
+                        <span
+                            class="flex size-8 items-center justify-center rounded-lg bg-red-50 dark:bg-red-500/10"
+                        >
                             <AlertTriangle class="size-4 text-red-500" />
                         </span>
                         <div>
-                            <p class="text-base font-semibold text-foreground">Are you sure?</p>
+                            <p class="text-base font-semibold text-foreground">
+                                Are you sure?
+                            </p>
                             <p class="text-[13px] text-muted-foreground">
-                                This action cannot be undone. This will permanently delete it from our servers.
+                                This action cannot be undone. This will
+                                permanently delete it from our servers.
                             </p>
                         </div>
                     </div>
                     <button
                         type="button"
                         class="absolute top-4 right-4 flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground/60 transition-colors hover:bg-black/[0.06] hover:text-foreground dark:hover:bg-white/[0.06]"
-                        @click="open = false; clearErrors(); reset()"
+                        @click="
+                            open = false;
+                            clearErrors();
+                            reset();
+                        "
                     >
                         <X class="size-4" />
                     </button>
@@ -70,7 +85,9 @@ const open = ref(false);
                 <!-- Body -->
                 <div class="px-6 py-5">
                     <div class="space-y-1.5">
-                        <label class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase">
+                        <label
+                            class="text-[12px] font-semibold tracking-wide text-muted-foreground uppercase"
+                        >
                             Password
                         </label>
                         <input
@@ -86,12 +103,18 @@ const open = ref(false);
                 </div>
 
                 <!-- Footer -->
-                <div class="flex items-center justify-end gap-2 border-t border-black/[0.06] px-6 py-4 dark:border-white/[0.06]">
+                <div
+                    class="flex items-center justify-end gap-2 border-t border-black/[0.06] px-6 py-4 dark:border-white/[0.06]"
+                >
                     <button
                         type="button"
                         class="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] disabled:opacity-50 dark:hover:bg-white/[0.05]"
                         :disabled="processing"
-                        @click="open = false; clearErrors(); reset()"
+                        @click="
+                            open = false;
+                            clearErrors();
+                            reset();
+                        "
                     >
                         Cancel
                     </button>

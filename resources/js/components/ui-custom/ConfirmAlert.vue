@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { AlertTriangle } from 'lucide-vue-next';
 import { computed } from 'vue';
 
@@ -53,7 +58,9 @@ const submit = (): void => {
                         >
                             {{ props.title }}
                         </AlertDialogTitle>
-                        <AlertDialogDescription class="text-[13px] text-muted-foreground">
+                        <AlertDialogDescription
+                            class="text-[13px] text-muted-foreground"
+                        >
                             {{ props.description }}
                         </AlertDialogDescription>
                     </div>

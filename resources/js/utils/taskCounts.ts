@@ -1,6 +1,5 @@
-import { Task } from '@/types/tasks/Task';
-import { TaskStatus } from '@/enums/TaskStatus';
+import type { Task } from '@/types/tasks/Task';
 
 export const countCompleted = (tasks: Task[]): number => {
-    return tasks.filter(t => t.status === TaskStatus.COMPLETED).length;
-}
+    return tasks.filter((t) => t.completed).length;
+};

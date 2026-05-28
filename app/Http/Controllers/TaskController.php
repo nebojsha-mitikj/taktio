@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\TaskStatusEnum;
 use App\Http\Requests\MaterializeRequest;
 use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateStatusRequest;
+use App\Http\Requests\UpdateTaskCompletedRequest;
 use App\Http\Requests\UpdateTaskLabelsRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\RecurringTaskTemplate;
@@ -121,11 +120,11 @@ class TaskController extends Controller
         return back()->with('success', 'Task updated successfully.');
     }
 
-    public function updateStatus(UpdateStatusRequest $request, Task $task): RedirectResponse
+    public function updateCompleted(UpdateTaskCompletedRequest $request, Task $task): RedirectResponse
     {
         $task->update($request->validated());
 
-        return back()->with('success', 'Task status updated successfully.');
+        return back()->with('success', 'Task updated successfully.');
     }
 
     public function updateLabels(UpdateTaskLabelsRequest $request, Task $task): RedirectResponse
@@ -158,7 +157,7 @@ class TaskController extends Controller
             'title' => $template->title,
             'description' => $template->description,
             'priority' => $template->priority,
-            'status' => TaskStatusEnum::TO_DO,
+            'completed' => false,
         ];
 
         try {
@@ -167,8 +166,8 @@ class TaskController extends Controller
             $task = Task::firstWhere($searchAttributes);
         }
 
-        if (isset($request->status)) {
-            $task->update(['status' => $request->status]);
+        if (isset($request->completed)) {
+            $task->update(['completed' => $request->completed]);
         }
 
         if ($task->wasRecentlyCreated) {

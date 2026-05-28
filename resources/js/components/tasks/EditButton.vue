@@ -3,7 +3,7 @@ import TooltipButton from '@/components/ui-custom/TooltipButton.vue';
 import { Pencil } from 'lucide-vue-next';
 
 const { tooltip } = defineProps<{
-    tooltip?: string
+    tooltip?: string;
 }>();
 const emit = defineEmits<{ (e: 'edit'): void }>();
 </script>

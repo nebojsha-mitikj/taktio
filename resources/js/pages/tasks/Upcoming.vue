@@ -11,7 +11,7 @@ import { LabelWithTasks } from '@/types/labels/Label';
 import type { Task } from '@/types/tasks/Task';
 import { formatDate } from '@/utils/date';
 import { Head } from '@inertiajs/vue3';
-import { today as intlToday, getLocalTimeZone } from '@internationalized/date';
+import { getLocalTimeZone, today as intlToday } from '@internationalized/date';
 
 const { dialogOpen, editingTask, editTask, createTask } = useTaskDialog();
 const tomorrowDate = intlToday(getLocalTimeZone()).add({ days: 1 });
@@ -37,9 +37,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div v-else class="mx-auto my-8 w-full max-w-4xl space-y-8">
             <!-- Page header -->
             <div>
-                <h1
-                    class="text-2xl font-bold tracking-tight text-foreground"
-                >
+                <h1 class="text-2xl font-bold tracking-tight text-foreground">
                     Upcoming
                 </h1>
                 <p class="mt-1 text-sm text-muted-foreground">
@@ -63,10 +61,9 @@ const breadcrumbs: BreadcrumbItem[] = [
                         <div
                             class="h-px flex-1 bg-black/[0.06] dark:bg-white/[0.06]"
                         />
-                        <span
-                            class="text-[11px] text-muted-foreground/50"
-                            >{{ tasks.length }}</span
-                        >
+                        <span class="text-[11px] text-muted-foreground/50">{{
+                            tasks.length
+                        }}</span>
                     </div>
                     <Tasks :tasks="tasks" :labels="labels" @edit="editTask" />
                 </div>

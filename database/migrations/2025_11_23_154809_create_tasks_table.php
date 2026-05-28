@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Enums\TaskPriorityEnum;
-use App\Enums\TaskStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -29,7 +28,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('date');
-            $table->enum('status', TaskStatusEnum::values())->default(TaskStatusEnum::TO_DO->value);
+            $table->enum('status', ['to-do', 'in-progress', 'completed'])->default('to-do');
             $table->enum('priority', TaskPriorityEnum::values())->default(TaskPriorityEnum::NONE->value);
 
             $table->unique(['recurring_task_template_id', 'date']);

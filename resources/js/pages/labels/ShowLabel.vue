@@ -32,8 +32,7 @@ const tasksByDate = computed<Record<string, Task[]>>(() => {
     }, {});
 });
 
-const colorClass =
-    'text-muted-foreground bg-black/[0.05] dark:bg-white/[0.06]';
+const colorClass = 'text-muted-foreground bg-black/[0.05] dark:bg-white/[0.06]';
 </script>
 
 <template>

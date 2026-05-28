@@ -32,7 +32,9 @@ const { labels, templates } = defineProps<{
     <Head title="Recurring" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="mx-auto my-8 w-full max-w-4xl space-y-4">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div
+                class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+            >
                 <div>
                     <h1
                         class="text-2xl font-bold tracking-tight text-foreground"
@@ -44,7 +46,10 @@ const { labels, templates } = defineProps<{
                     </p>
                 </div>
                 <button
-                    @click="($event.currentTarget as HTMLElement).blur(); createTemplate()"
+                    @click="
+                        ($event.currentTarget as HTMLElement).blur();
+                        createTemplate();
+                    "
                     class="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-black/[0.1] bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-black/[0.04] sm:w-auto sm:justify-start dark:border-white/[0.1] dark:bg-elevated dark:hover:bg-white/[0.06]"
                 >
                     <Plus class="size-3.5" />
@@ -56,9 +61,7 @@ const { labels, templates } = defineProps<{
                 v-if="templates.length === 0"
                 class="rounded-xl border border-black/[0.07] bg-card px-6 py-12 text-center shadow-sm dark:border-white/[0.07]"
             >
-                <p
-                    class="text-[15px] font-semibold text-foreground"
-                >
+                <p class="text-[15px] font-semibold text-foreground">
                     No recurring tasks yet
                 </p>
                 <p class="mt-1 text-sm text-muted-foreground">

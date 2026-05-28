@@ -1,6 +1,6 @@
+import { FlashProps } from '@/types/Flash';
 import { InertiaLinkProps } from '@inertiajs/vue3';
 import type { LucideIcon } from 'lucide-vue-next';
-import { FlashProps } from '@/types/Flash';
 
 export interface Auth {
     user: User;

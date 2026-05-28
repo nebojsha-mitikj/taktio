@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Enums\TaskPriorityEnum;
 use App\Enums\TaskRecurEnum;
-use App\Enums\TaskStatusEnum;
 use App\Enums\WeekdayEnum;
 use Carbon\Carbon;
 use Database\Factories\RecurringTaskTemplateFactory;
@@ -134,7 +133,7 @@ class RecurringTaskTemplate extends Model
             'description' => $this->description,
             'date' => $date->toDateString(),
             'priority' => $this->priority,
-            'status' => TaskStatusEnum::TO_DO,
+            'completed' => false,
             'recurring_task_template_id' => $this->id,
         ]);
         $task->setRelation('labels', $this->labels);

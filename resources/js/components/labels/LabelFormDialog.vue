@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { store, update } from '@/actions/App/Http/Controllers/LabelController';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import type { AppPageProps } from '@/types';
 import type { CreateLabelPayload } from '@/types/labels/CreateLabelPayload';
 import type { Label } from '@/types/labels/Label';
@@ -93,7 +98,9 @@ const submitRequest = (payload: RequestPayload & CreateLabelPayload): void => {
                         >
                             {{ isEditing ? 'Edit label' : 'New label' }}
                         </DialogTitle>
-                        <DialogDescription class="text-[13px] text-muted-foreground">
+                        <DialogDescription
+                            class="text-[13px] text-muted-foreground"
+                        >
                             {{
                                 isEditing
                                     ? 'Rename this label.'
