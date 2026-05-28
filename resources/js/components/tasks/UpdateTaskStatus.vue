@@ -40,7 +40,6 @@ const toggle = (): void => {
 <template>
     <Checkbox
         :model-value="task.completed"
-        :disabled="isUpdating"
         @update:model-value="toggle"
     />
 </template>
