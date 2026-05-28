@@ -50,6 +50,7 @@ Data flows from Laravel controllers → Inertia → Vue page components as props
 - **Virtual tasks** — recurring tasks not yet written to the DB; computed in-memory from active templates for display; identified by `is_virtual: true` on the `Task` interface
 - **Materialization** — converting a virtual task into a real DB row; triggered when the user first interacts with a virtual task (e.g. changing status); sends `POST /tasks/{template}/materialize` with the target date and desired status; uses `firstOrCreate` to prevent duplicates
 - **Labels** — user-defined tags applied to both tasks and recurring templates
+- **Monthly Plans** — per-user, per-month planning board; `MonthPlan` holds a `main_goal` text and has many `PlanGoal` sub-goals, each with many `PlanGoalStep` steps; goal `completed` is a stored boolean (not computed); plans are auto-created on first access for a given year+month
 
 ### Backend Structure
 
@@ -57,16 +58,16 @@ Data flows from Laravel controllers → Inertia → Vue page components as props
 app/
 ├── Enums/              # TaskStatusEnum, TaskPriorityEnum, TaskRecurEnum, WeekdayEnum
 ├── Http/
-│   ├── Controllers/    # TaskController, RecurringTaskTemplateController, LabelController, Settings/*
+│   ├── Controllers/    # TaskController, RecurringTaskTemplateController, LabelController, PlanController, PlanGoalController, PlanGoalStepController, Settings/*
 │   └── Requests/       # Form request validation (Store/Update for each resource)
-├── Models/             # Task, RecurringTaskTemplate, RecurringTaskTemplatePeriod, Label, User
-├── Policies/           # TaskPolicy, LabelPolicy, RecurringTaskTemplatePolicy (user-scoped auth)
+├── Models/             # Task, RecurringTaskTemplate, RecurringTaskTemplatePeriod, Label, MonthPlan, PlanGoal, PlanGoalStep, User
+├── Policies/           # TaskPolicy, LabelPolicy, RecurringTaskTemplatePolicy, PlanGoalPolicy, PlanGoalStepPolicy (user-scoped auth)
 └── Traits/
     ├── EnumValues              # Adds values() to enums
     └── RecurringTaskTemplateRules  # Shared validation rules between Store/Update requests
 ```
 
-Routes are split by resource: `routes/tasks.php`, `routes/recurring.php`, `routes/labels.php`, `routes/settings.php`.
+Routes are split by resource: `routes/tasks.php`, `routes/recurring.php`, `routes/labels.php`, `routes/settings.php`, `routes/plan.php`.
 
 All user data is scoped — policies enforce that users can only access their own resources. All PHP files use `declare(strict_types=1)`.
 
@@ -74,11 +75,11 @@ All user data is scoped — policies enforce that users can only access their ow
 
 ```
 resources/js/
-├── pages/              # Inertia page components (tasks/Today.vue, tasks/Upcoming.vue, recurring/Recurring.vue, etc.)
+├── pages/              # Inertia page components (tasks/Today.vue, tasks/Upcoming.vue, recurring/Recurring.vue, plan/Plan.vue, etc.)
 ├── components/
 │   ├── ui/             # Headless reka-ui wrappers (shadcn-style; generated/installed, rarely edited)
 │   ├── ui-custom/      # Project-specific primitives (StatusBadge, ConfirmAlert, TooltipButton)
-│   └── tasks|labels|recurring-task-templates/  # Feature components
+│   └── tasks|labels|recurring-task-templates|plan/  # Feature components
 ├── layouts/            # Layout wrappers (AppLayout, AuthLayout)
 ├── composables/        # Shared Vue composition logic (useTaskDialog, useLabelDialog, useRecurringTemplateDialog, etc.)
 ├── enums/              # Frontend copies of PHP enums (must stay in sync)
@@ -101,7 +102,7 @@ resources/js/
 
 ### Database
 
-SQLite by default (MySQL/PostgreSQL supported). Key constraint: `(recurring_task_template_id, date)` unique on `tasks` table — prevents duplicate materialized tasks per template per day.
+SQLite by default for local dev; production runs MySQL on AWS RDS. Key constraint: `(recurring_task_template_id, date)` unique on `tasks` table — prevents duplicate materialized tasks per template per day.
 
 ### Testing
 
