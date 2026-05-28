@@ -7,7 +7,7 @@ use App\Http\Controllers\PlanGoalController;
 use App\Http\Controllers\PlanGoalStepController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth'], static function () {
+Route::group(['middleware' => ['auth', 'verified']], static function () {
     Route::get('/plan', [PlanController::class, 'index'])->name('plan.index');
 
     // Specific non-parameterized sub-routes must come before /{year}/{month} to avoid capture
